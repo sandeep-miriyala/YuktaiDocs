@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#0a0f1c" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
-<meta name="description" content="YuktAI page and data RAG: try BM25 retrieval in TypeScript or Rust on your own text, add an on-device model, and copy the code.">
+<meta name="description" content="YuktAI page and data RAG: the new Ask page panel (Rust search, on-device AI, highlighted sources) and BM25 retrieval on your own text, with code to copy.">
 
 <title>Ask page (RAG) · YuktaiDocs</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -26,6 +26,7 @@
     <a class="brand" href="./"><span class="brandmark"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-namaskar"/></svg></span><span>YuktaiDocs</span></a>
     <span class="ver-chip" title="YuktAI version used on this site">v<span class="ver-text">5.3.12</span></span>
     <div class="tools">
+      <button type="button" class="ask-btn" id="ask-btn" aria-keyshortcuts="Control+/" title="Ask these docs (Ctrl + /)"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg><span class="ask-text">Ask</span><span class="sr-only"> these docs</span></button>
       <button type="button" class="install-btn" id="install-btn" hidden><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-install"/></svg><span>Install app</span></button>
       <span class="icon-btn net-chip" id="net-chip" role="img" aria-label="Network status"></span>
       <button type="button" class="icon-btn" id="theme-btn" aria-pressed="false"><span id="theme-icon"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-moon"/></svg></span><span class="sr-only">Dark theme</span></button>
@@ -44,7 +45,85 @@
     <div class="page-head">
       <p class="kicker"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg>Ask page (RAG)</p>
       <h1>Ask page (RAG)</h1><p class="lead">Answer questions from your own text, your page and your grid data. YuktAI finds the best passages and quotes them; an optional on-device model can then write the answer from only those passages.</p></div>
-<div class="callout"><p><strong>What it is, honestly:</strong> BM25 keyword retrieval with prefix matching for word endings and Telugu-aware tokens, in TypeScript or Rust. It is not vector (embedding) search: it finds passages that share words with the question, so an English question will not match Telugu-only text.</p></div>
+<div class="callout"><p><strong>What it is, honestly:</strong> the built-in search below (<code>createContextIndex</code>) is BM25 keyword retrieval with prefix matching and Telugu-aware tokens, in TypeScript or Rust. It finds passages that share words with the question. For meaning search (embeddings), use the new <a href="#panel-new">Ask page panel</a> in Balanced mode.</p></div>
+
+<h2 id="panel-new" style="margin-top:20px">New: the Ask page panel <span class="ver-chip">@yuktishaalaa/ask-page 0.1.0</span></h2>
+<p>A side panel that answers questions about the page from the page itself, highlights where each answer came from, and says so when the page does not answer it. It is running on this site now: press <strong>Ask</strong> in the top bar, or <kbd>Ctrl</kbd> + <kbd>/</kbd>.</p>
+<div class="demo"><p class="demo-label"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-play"/></svg>Live on these docs</p>
+  <p>Open the panel and try one of these. Every answer shows its source; click it to see the passage highlighted on this page.</p>
+  <div class="btn-row" id="askp-try">
+    <button type="button" class="btn" data-ask="How do I add the Ask page panel?">How do I add the Ask page panel?</button>
+    <button type="button" class="btn" data-ask="Which modes are there?">Which modes are there?</button>
+    <button type="button" class="btn" data-ask="Is anything I type read?">Is anything I type read?</button>
+    <button type="button" class="btn" data-ask="What is the refund policy?">What is the refund policy? (not on this page)</button>
+  </div>
+  <p class="hint">Also on its own page: <a href="https://sandeep-miriyala.github.io/yuktai/ask-page/" target="_blank" rel="noopener noreferrer">the Ask page demo<span class="sr-only"> (opens in a new tab)</span></a>, with a Telugu section and a form to test the privacy filter.</p>
+</div>
+
+<h3 id="panel-modes">Modes</h3>
+<table class="ref">
+  <caption>Ask page modes</caption>
+  <thead><tr><th scope="col">Mode</th><th scope="col">Search</th><th scope="col">Answer</th><th scope="col">Download</th></tr></thead>
+  <tbody>
+    <tr><td>Fast</td><td>Rust BM25 (WebAssembly, 52 KB)</td><td>The best sentences from the page, quoted</td><td>About 100 KB, nothing else</td></tr>
+    <tr><td>Balanced</td><td>Keywords plus meaning (multilingual embeddings), merged with RRF</td><td>Chrome built-in AI if it is ready, else quoted</td><td>About 118 MB once, after the visitor agrees</td></tr>
+    <tr><td>Best</td><td>Same as Balanced</td><td>Chrome built-in AI, or WebLLM if the site enables it</td><td>More, once</td></tr>
+  </tbody>
+</table>
+
+<h3 id="panel-privacy">Privacy and accessibility</h3>
+<ul>
+  <li>Never reads what visitors type: input and textarea values, passwords, rich-text editors and anything marked <code>data-ask-private</code> are skipped before the page is indexed.</li>
+  <li>Page text and questions stay on the device. No server, no API key, no analytics on questions, no tracing. On pages that look signed-in, nothing is saved.</li>
+  <li>Says "This page doesn't answer that" instead of guessing, and labels AI answers with "AI can be wrong. Check the source."</li>
+  <li>17 px text (18 px for Telugu) with A− / A+, 44 px buttons, keyboard and screen reader support, dark and light, high contrast. axe: 0 violations.</li>
+  <li>Browser agents can use it through read-only WebMCP tools: <code>ask_page</code>, <code>get_page_outline</code>, <code>get_suggested_questions</code>.</li>
+</ul>
+
+<h3 id="panel-install">Add it to your site</h3>
+<div class="codetabs" data-codetabs><div class="tablist" role="tablist" aria-label="Code"><button type="button" role="tab" id="askp-code-next-tab" data-fw="next" aria-controls="askp-code-next" aria-selected="true" tabindex="0"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-code"/></svg>Next.js / React</button><button type="button" role="tab" id="askp-code-vanilla-tab" data-fw="vanilla" aria-controls="askp-code-vanilla" aria-selected="false" tabindex="-1"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-file"/></svg>Vanilla JS</button></div><div role="tabpanel" id="askp-code-next" aria-labelledby="askp-code-next-tab"><div class="codefile"><div class="codehead"><span class="file" id="askp-code-next-code-name">app/AskPage.tsx</span><button type="button" class="copy-btn" data-what="app/AskPage.tsx"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-copy"/></svg><span class="copy-label">Copy</span><span class="sr-only"> app/AskPage.tsx</span></button></div><pre><code id="askp-code-next-code">"use client"
+// app/AskPage.tsx: add once, in app/layout.tsx
+import { useEffect } from "react"
+import { mountAskPage } from "@yuktishaalaa/ask-page"
+
+export default function AskPage() {
+  useEffect(() =&gt; {
+    mountAskPage({
+      modes: ["fast", "balanced"],   // what visitors may pick
+      questions: [{ text: "How do I apply?", path: "/scheme" }],
+    })
+  }, [])
+  return null
+}</code></pre></div></div><div role="tabpanel" id="askp-code-vanilla" aria-labelledby="askp-code-vanilla-tab" hidden><div class="codefile"><div class="codehead"><span class="file" id="askp-code-vanilla-code-name">index.html</span><button type="button" class="copy-btn" data-what="index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-copy"/></svg><span class="copy-label">Copy</span><span class="sr-only"> index.html</span></button></div><pre><code id="askp-code-vanilla-code">&lt;!-- before &lt;/body&gt;: adds the "Ask this page" button --&gt;
+&lt;script&gt;
+  window.YuktaiAskConfig = {
+    modes: ["fast", "balanced"],
+    questions: [{ text: "How do I apply?", path: "/scheme" }]
+  }
+&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@yuktishaalaa/ask-page/dist/ask-page.global.js" defer&gt;&lt;/script&gt;
+
+&lt;!-- mark anything private: it is never read --&gt;
+&lt;div data-ask-private&gt;…&lt;/div&gt;</code></pre></div></div></div>
+<p class="hint">Until the package is published on npm, download <code>ask-page.global.js</code> from the <a href="https://github.com/sandeep-miriyala/yuktai/tree/main/ask-page" target="_blank" rel="noopener noreferrer">yuktai repo<span class="sr-only"> (opens in a new tab)</span></a> and host it yourself, as this site does. Content Security Policy: allow <code>worker-src blob:</code> and <code>'wasm-unsafe-eval'</code>; without them it still works, more slowly, on the page thread.</p>
+
+<h3 id="panel-headless">Without the panel</h3>
+<div class="codetabs" data-codetabs><div class="tablist" role="tablist" aria-label="Code"><button type="button" role="tab" id="askp-api-next-tab" data-fw="next" aria-controls="askp-api-next" aria-selected="true" tabindex="0"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-code"/></svg>Next.js / React</button><button type="button" role="tab" id="askp-api-vanilla-tab" data-fw="vanilla" aria-controls="askp-api-vanilla" aria-selected="false" tabindex="-1"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-file"/></svg>Vanilla JS</button></div><div role="tabpanel" id="askp-api-next" aria-labelledby="askp-api-next-tab"><div class="codefile"><div class="codehead"><span class="file" id="askp-api-next-code-name">lib/ask.ts</span><button type="button" class="copy-btn" data-what="lib/ask.ts"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-copy"/></svg><span class="copy-label">Copy</span><span class="sr-only"> lib/ask.ts</span></button></div><pre><code id="askp-api-next-code">import { AskPage } from "@yuktishaalaa/ask-page"
+
+const page = new AskPage({ config: { modes: ["fast"] } })
+const a = await page.ask("How do I install it?")
+a.text      // the answer
+a.kind      // "quote" | "ai" | "shortcut" | "unknown"
+a.sources   // [{ ref: "Installation", excerpt, elements }]</code></pre></div><div class="codefile"><div class="codehead"><span class="file" id="askp-api-next-code-1-name">lib/ask-graph.ts</span><button type="button" class="copy-btn" data-what="lib/ask-graph.ts"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-copy"/></svg><span class="copy-label">Copy</span><span class="sr-only"> lib/ask-graph.ts</span></button></div><pre><code id="askp-api-next-code-1">import { askWithGraph, AskPageRetriever } from "@yuktishaalaa/ask-page/langgraph"
+
+// the same five steps as a LangGraph.js StateGraph
+const answer = await askWithGraph(page, "How do I install it?")
+
+// or a LangChain retriever over the current page
+const docs = await new AskPageRetriever(page, 5).invoke("model download size")</code></pre></div></div><div role="tabpanel" id="askp-api-vanilla" aria-labelledby="askp-api-vanilla-tab" hidden><div class="codefile"><div class="codehead"><span class="file" id="askp-api-vanilla-code-name">app.js</span><button type="button" class="copy-btn" data-what="app.js"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-copy"/></svg><span class="copy-label">Copy</span><span class="sr-only"> app.js</span></button></div><pre><code id="askp-api-vanilla-code">const page = new YuktaiAsk.AskPage()
+const a = await page.ask("How do I install it?")
+console.log(a.text, a.sources.map(s =&gt; s.ref))</code></pre></div></div></div>
+<p class="hint">Full options, the architecture and the test results are in the <a href="https://github.com/sandeep-miriyala/yuktai/tree/main/packages/ask-page#readme" target="_blank" rel="noopener noreferrer">package README<span class="sr-only"> (opens in a new tab)</span></a>.</p>
 <h2 id="try" style="margin-top:20px">Try it with your own text</h2>
 <p>Paste your FAQ, policy or help text. Each paragraph (separated by a blank line) is one passage.</p>
 <div class="demo"><p class="demo-label"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-play"/></svg>Live demo</p>
@@ -137,8 +216,8 @@ const r = await askAboutPage("Which fields are missing labels?")
 // { intent, answer, targets, suggestions }
 const outline = analyzePage()   // title, language, headings, landmarks, counts …</code></pre></div></div><div role="tabpanel" id="pg-code-vanilla" aria-labelledby="pg-code-vanilla-tab" hidden><div class="codefile"><div class="codehead"><span class="file" id="pg-code-vanilla-code-name">app.js</span><button type="button" class="copy-btn" data-what="app.js"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-copy"/></svg><span class="copy-label">Copy</span><span class="sr-only"> app.js</span></button></div><pre><code id="pg-code-vanilla-code">const r = await yuktai.askAboutPage("Which fields are missing labels?")
 const outline = yuktai.analyzePage()</code></pre></div></div></div>
-<h2 id="panel">The Ask page panel</h2>
-<p>The same search with a ready-made UI: <code>AgenticPanel</code> in React, <code>mountAgenticPanel</code> in plain HTML, or the 💬 button of <code>YuktAIWrapper</code>.</p>
+<h2 id="panel">The built-in 💬 panel</h2>
+<p>The built-in search above with a ready-made UI, inside <code>@yuktishaalaa/yuktai</code>: <code>AgenticPanel</code> in React, <code>mountAgenticPanel</code> in plain HTML, or the 💬 button of <code>YuktAIWrapper</code>. For highlighted sources, Telugu answers and meaning search, use the <a href="#panel-new">Ask page panel</a>.</p>
 <div class="demo"><p class="demo-label"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-play"/></svg>Live demo</p><div id="rag-panel" data-needs-yuktai><p class="loading-note">Loading…</p></div></div><div class="codetabs" data-codetabs><div class="tablist" role="tablist" aria-label="Code"><button type="button" role="tab" id="panel-code-next-tab" data-fw="next" aria-controls="panel-code-next" aria-selected="true" tabindex="0"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-code"/></svg>Next.js / React</button><button type="button" role="tab" id="panel-code-vanilla-tab" data-fw="vanilla" aria-controls="panel-code-vanilla" aria-selected="false" tabindex="-1"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-file"/></svg>Vanilla JS</button></div><div role="tabpanel" id="panel-code-next" aria-labelledby="panel-code-next-tab"><div class="codefile"><div class="codehead"><span class="file" id="panel-code-next-code-name">app/help/page.tsx</span><button type="button" class="copy-btn" data-what="app/help/page.tsx"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-copy"/></svg><span class="copy-label">Copy</span><span class="sr-only"> app/help/page.tsx</span></button></div><pre><code id="panel-code-next-code">"use client"
 import { AgenticPanel } from "@yuktishaalaa/yuktai"
 
@@ -164,6 +243,8 @@ export default function Help() {
   <svg class="ring" viewBox="0 0 56 56" aria-hidden="true" focusable="false"><circle class="bar" id="to-top-bar" cx="28" cy="28" r="26"/></svg>
   <svg class="i arrow" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-arrowUp"/></svg>
 </button>
+<script src="assets/js/ask-panel.js" defer></script>
+<script src="assets/js/ask-page.global.js" defer></script>
 <script src="assets/js/config.js" defer></script>
 <script src="assets/js/site.js" defer></script>
 <script src="assets/js/pages/ask.js" defer></script>

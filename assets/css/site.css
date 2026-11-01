@@ -63,6 +63,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .install-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border-radius:10px;border:2px solid var(--d-btn-bg);background:var(--d-btn-bg);color:var(--d-btn-text);font:700 .95rem var(--d-font);cursor:pointer}
 .install-btn svg{width:20px;height:20px}
 .install-btn[hidden]{display:none}
+/* "Ask" opens the @yuktishaalaa/ask-page panel (assets/js/ask-panel.js) */
+.ask-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:10px;border:2px solid var(--d-btn-bg);background:var(--d-panel);color:var(--d-text);font:700 .95rem var(--d-font);cursor:pointer}
+.ask-btn svg{width:20px;height:20px;color:var(--d-link)}
+.ask-btn:hover{background:var(--d-panel2)}
+@media (max-width:520px){.ask-btn{padding:0;min-width:44px;justify-content:center}.ask-btn .ask-text{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
 .banner{max-width:var(--d-max);margin:12px auto 0;padding:0 20px}
 .banner p{display:flex;gap:10px;align-items:flex-start;margin:0;padding:10px 14px;border:2px solid var(--d-rust);border-radius:12px;background:var(--d-panel);color:var(--d-text);font-size:.97rem}
 .banner svg{color:var(--d-rust);margin-top:2px}
@@ -216,7 +221,7 @@ body > div[role="alert"][aria-live="assertive"][style*="0, 90, 156"]{background:
   .ref td{border:0;padding:3px 12px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-@media (forced-colors:active){.demo,.card,.codetabs,.btn,.icon-btn,.copy-btn{border:1px solid CanvasText}.sidenav a[aria-current="page"]{outline:2px solid Highlight}}
+@media (forced-colors:active){.demo,.card,.codetabs,.btn,.icon-btn,.copy-btn,.ask-btn{border:1px solid CanvasText}.sidenav a[aria-current="page"]{outline:2px solid Highlight}}
 @media print{.topbar,.sidenav,.to-top,.net,.copy-btn{display:none!important}.layout{display:block}}
 
 
