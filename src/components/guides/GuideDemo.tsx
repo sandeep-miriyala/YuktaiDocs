@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { startDocs } from "@/lib/docs/runtime";
+import { useEffect, useRef } from "react";
+import { setupPage, startDocs } from "@/lib/docs/runtime";
 import setupData from "@/lib/docs/data";
 
 // Each guide's live demo, bundled by Next.js (src/lib/docs/pages/<name>.ts).
@@ -18,14 +18,14 @@ const DEMOS: Record<string, () => Promise<{ default: () => void }>> = {
   rust: () => import("@/lib/docs/pages/rust"),
 };
 
-const ran = new Set<string>();
-
 export default function GuideDemo({ page }: { page: string }) {
+  const done = useRef(false);
   useEffect(() => {
-    if (ran.has(page)) return; // once per page load (React may run effects twice in development)
-    ran.add(page);
+    if (done.current) return; // once per visit (React runs effects twice in development)
+    done.current = true;
     if (!window.DocsData) setupData();
     startDocs().then(async () => {
+      setupPage();
       const load = DEMOS[page];
       if (load) (await load()).default();
     });

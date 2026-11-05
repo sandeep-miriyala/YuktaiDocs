@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // live demos ported from the earlier site (plain JS style); typed rewrite to follow
+    "src/lib/docs/pages/**",
+    "src/lib/docs/data.ts",
   ]),
 ]);
 

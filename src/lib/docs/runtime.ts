@@ -64,6 +64,12 @@ const esc = (s: unknown) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;
 const icon = (name: string, cls?: string) => iconSvg(name, { size: 24 }).replace("<svg ", `<svg class="i${cls ? " " + cls : ""}" `);
 
 let started: Promise<DocsApi> | null = null;
+let pageSetup: () => void = () => {};
+
+/** After each page change: code tabs, versions, release note for the page now on screen. */
+export function setupPage() {
+  pageSetup();
+}
 
 /** Starts once per page: the helpers, the code tabs, then YuktAI. */
 export function startDocs(): Promise<DocsApi> {
@@ -120,15 +126,16 @@ export function startDocs(): Promise<DocsApi> {
       e.preventDefault();
       pick(tabs[(n + tabs.length) % tabs.length].getAttribute("data-fw") || "next", box);
     });
-    showFw(currentFw);
-
-    // the version on this page, in text and in code
-    $$(".ver-text").forEach((el) => { el.textContent = VERSIONS.yuktai; });
-    $$("pre code").forEach((c) => {
-      const t = (c.textContent || "").replace(/(@yuktishaalaa\/yuktai@)\d+\.\d+\.\d+/g, "$1" + VERSIONS.yuktai);
-      if (t !== c.textContent) c.textContent = t;
-    });
-    latestOnNpm();
+    pageSetup = () => {
+      showFw(currentFw);
+      // the version on this page, in text and in code
+      $$(".ver-text").forEach((el) => { el.textContent = VERSIONS.yuktai; });
+      $$("pre code").forEach((c) => {
+        const t = (c.textContent || "").replace(/(@yuktishaalaa\/yuktai@)\d+\.\d+\.\d+/g, "$1" + VERSIONS.yuktai);
+        if (t !== c.textContent) c.textContent = t;
+      });
+      latestOnNpm();
+    };
 
     const Docs: DocsApi = {
       version: VERSIONS.yuktai,

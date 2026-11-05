@@ -1,5 +1,6 @@
 // jquery: Next.js route. Icons from @yuktishaalaa/yuktai/icons; the live demo is src/lib/docs/pages/jquery.ts.
 import type { Metadata } from "next";
+import Link from "next/link";
 import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
@@ -53,7 +54,7 @@ export default function JqueryPage() {
 <table className={"ref"}><caption>{"Common replacements in jQuery 4"}</caption><thead><tr><th scope={"col"}>{"Old (removed)"}</th><th scope={"col"}>{"Use instead"}</th></tr></thead><tbody><tr><td><code>{"$.trim(s)"}</code></td><td><code>{"s.trim()"}</code></td></tr><tr><td><code>{"$.isArray(a)"}</code></td><td><code>{"Array.isArray(a)"}</code></td></tr><tr><td><code>{"$.parseJSON(t)"}</code></td><td><code>{"JSON.parse(t)"}</code></td></tr><tr><td><code>{"$.now()"}</code></td><td><code>{"Date.now()"}</code></td></tr><tr><td><code>{"$.isFunction(f)"}</code></td><td><code>{"typeof f === \"function\""}</code></td></tr></tbody></table>{" "}
 <h2 id={"where"}>{"6. Where to put it"}</h2>{" "}
 <div className={"grid2"}>{" "}
-<div className={"card"}><h3><YuktaiIcon name="layout" className="i" size={24} aria-hidden="true" />{" WordPress"}</h3><p>{"Add the YuktAI scripts in the theme footer, or use the "}<a href={"/php/#wordpress"}>{"PHP package"}</a>{" with "}<code>{"wp_footer"}</code>{". WordPress already loads jQuery."}</p></div>{" "}
+<div className={"card"}><h3><YuktaiIcon name="layout" className="i" size={24} aria-hidden="true" />{" WordPress"}</h3><p>{"Add the YuktAI scripts in the theme footer, or use the "}<Link href={"/php/#wordpress"}>{"PHP package"}</Link>{" with "}<code>{"wp_footer"}</code>{". WordPress already loads jQuery."}</p></div>{" "}
 <div className={"card"}><h3><YuktaiIcon name="code" className="i" size={24} aria-hidden="true" />{" ASP.NET WebForms"}</h3><p>{"Add the scripts once in "}<code>{"Site.Master"}</code>{", before "}<code>{"</body>"}</code>{". Every page that uses the master gets them."}</p></div>{" "}
 </div>{" "}
 <div className={"codetabs"}><div className={"codefile"}><div className={"codehead"}><span className={"file"} id={"jq-aspnet-name"}>{"Site.Master"}</span><button type={"button"} className={"copy-btn"} data-what={"Site.Master"}><YuktaiIcon name="copy" className="i" size={24} aria-hidden="true" /><span className={"copy-label"}>{"Copy"}</span><span className={"sr-only"}>{" Site.Master"}</span></button></div><pre><code id={"jq-aspnet"}>{"<%-- Site.Master, just before </body> --%>\n<script src=\"https://code.jquery.com/jquery-3.7.1.min.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/@yuktishaalaa/yuktai@5.3.12/vanilla/index.min.js\"></script>\n<script src=\"https://cdn.jsdelivr.net/npm/@yuktishaalaa/ask-page@1.0.0/dist/ask-page.global.js\" defer></script>"}</code></pre></div></div>{" "}

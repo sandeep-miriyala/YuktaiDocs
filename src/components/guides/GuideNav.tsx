@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { HomeIcon, MenuIcon, ArrowDownIcon } from "@yuktishaalaa/yuktai/icons";
@@ -20,13 +21,12 @@ export default function GuideNav() {
       </button>
       <p className="gnav-title">Guides</p>
       <ul id="gnav-list">
-        <li><a href="/"><HomeIcon size={20} aria-hidden="true" />Home</a></li>
+        <li><Link href="/"><HomeIcon size={20} aria-hidden="true" />Home</Link></li>
         {GUIDES.map((g) => (
           <li key={g.href}>
-            {/* full page loads, so each guide's demo scripts start fresh */}
-            <a href={g.href} aria-current={g.href === path ? "page" : undefined}>
+            <Link href={g.href} aria-current={g.href === path ? "page" : undefined} onClick={() => setOpen(false)}>
               <GuideIcon name={g.icon} size={20} />{g.title}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

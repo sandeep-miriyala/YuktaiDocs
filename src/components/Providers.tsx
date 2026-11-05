@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import { YuktAIWrapper } from "@yuktishaalaa/yuktai";
+import { startDocs } from "@/lib/docs/runtime";
 import { ask, askPanel } from "./ask";
 
 function currentTheme() {
@@ -13,14 +12,14 @@ function currentTheme() {
 
 /**
  * YuktAI on every page, straight from npm:
- *  • @yuktishaalaa/yuktai  → ♿ accessibility and 🛠 page tools (YuktAIWrapper) on the home page.
- *    The guides load the vanilla build for their live demos, and it adds the same buttons there.
+ *  • @yuktishaalaa/yuktai  → ♿ accessibility and 🛠 page tools on every page, and window.yuktai
+ *    for the live demos (one instance, so moving between pages stays instant)
  *  • @yuktishaalaa/ask-page → "Ask these docs" panel, opened by the header, the hero or Ctrl + K
  */
 export default function Providers({ children }: { children: ReactNode }) {
-  const home = usePathname() === "/";
   useEffect(() => {
     let cancelled = false;
+    void startDocs();
     import("@yuktishaalaa/ask-page").then(({ mountAskPage }) => {
       if (cancelled || askPanel()) return;
       const el = mountAskPage({
@@ -63,10 +62,5 @@ export default function Providers({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  if (!home) return <>{children}</>;
-  return (
-    <YuktAIWrapper position="left" launcher showAccessibility showPageTools engine="rust">
-      {children}
-    </YuktAIWrapper>
-  );
+  return <>{children}</>;
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CheckIcon, ArrowRightIcon } from "@yuktishaalaa/yuktai/icons";
 import {
   COMPARE, GUIDES, LINKS, PACKAGES, STACKS, STATS, STEPS, TESTS, TEST_TOTAL, VERSIONS, WEB_SHARE,
@@ -31,11 +32,11 @@ export function Stacks() {
         <ul className="stack-grid">
           {STACKS.map((s) => (
             <li key={s.name} className={`stack ${s.tone === "rs" ? "is-rust" : ""}`}>
-              <a href={s.href}>
+              <Link href={s.href}>
                 <span className={`badge t-${s.tone}`} aria-hidden="true">{s.badge}</span>
                 <strong>{s.name}</strong>
                 <ArrowRightIcon size={18} aria-hidden="true" />
-              </a>
+              </Link>
               <code>{s.code}</code>
             </li>
           ))}
@@ -132,11 +133,11 @@ export function Guides() {
       <ul className="guide-grid">
         {GUIDES.map((g) => (
           <li key={g.href}>
-            <a className="guide" href={g.href}>
+            <Link className="guide" href={g.href}>
               <span className="iconbox"><GuideIcon name={g.icon} /></span>
               <strong>{g.title}</strong>
               <span>{g.text}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

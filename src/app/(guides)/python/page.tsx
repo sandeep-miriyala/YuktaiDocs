@@ -1,5 +1,6 @@
 // python: Next.js route. Icons from @yuktishaalaa/yuktai/icons; the live demo is src/lib/docs/pages/python.ts.
 import type { Metadata } from "next";
+import Link from "next/link";
 import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
@@ -46,7 +47,7 @@ export default function PythonPage() {
 <div className={"card"}><h3><YuktaiIcon name="code" className="i" size={24} aria-hidden="true" />{" Not escaped twice"}</h3><p>{"The tag is marked safe for Jinja2 and Django, so autoescaping does not turn it into text."}</p></div>{" "}
 </div>{" "}
 <h2 id={"next"}>{"Coming next"}</h2>{" "}
-<p>{"Version 0.2 brings YuktAI's "}<a href={"/rust/"}>{"Rust engines"}</a>{" to Python: fast grid search and the BM25 index for page RAG, with the same results as in the browser."}</p>{" "}
+<p>{"Version 0.2 brings YuktAI's "}<Link href={"/rust/"}>{"Rust engines"}</Link>{" to Python: fast grid search and the BM25 index for page RAG, with the same results as in the browser."}</p>{" "}
 
       <GuideDemo page="python" />
     </>
