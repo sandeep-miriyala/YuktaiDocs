@@ -1,16 +1,16 @@
 /* YuktaiDocs settings — the only file to change for a new YuktAI release.
  *
- *   1. Set `version` to the new release (for example "5.3.10").
+ *   1. Set `version` to the new release (for example "5.3.13").
  *   2. Bump CACHE in sw.js (for example "yuktaidocs-v2") so visitors get it.
  *   3. Commit and push: Netlify redeploys the site.
  *
- * Try a release without changing anything: add ?v=5.3.10 to any page URL
+ * Try a release without changing anything: add ?v=5.3.13 to any page URL
  * (kept for this browser tab; ?v=default goes back).
  */
 window.DOCS_CONFIG = {
   version: "5.3.12",
   // Used only if `version` cannot be loaded (for example, not published yet).
-  fallbackVersion: "5.3.11",
+  fallbackVersion: "5.3.12",
   // Tried in order; the second one is used only if the first fails.
   cdns: [
     "https://cdn.jsdelivr.net/npm/@yuktishaalaa/yuktai@{v}/vanilla/index.min.js",

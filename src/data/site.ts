@@ -1,0 +1,91 @@
+// Everything the site states in one place: versions, numbers, links.
+// Change a release here and every page follows.
+
+export const VERSIONS = {
+  yuktai: "5.3.12",
+  askPage: "1.0.0",
+} as const;
+
+export const LINKS = {
+  github: "https://github.com/sandeep-miriyala/yuktai",
+  npmYuktai: "https://www.npmjs.com/package/@yuktishaalaa/yuktai",
+  npmAsk: "https://www.npmjs.com/package/@yuktishaalaa/ask-page",
+  w3techs: "https://w3techs.com/technologies/overview/javascript_library",
+} as const;
+
+export type IconKey =
+  | "accessibility" | "grid" | "robot" | "chat" | "tools" | "code" | "hub"
+  | "layout" | "wand" | "star" | "dataObject" | "speed";
+
+// The guides. Each one is still a page from the earlier site until it is moved to React.
+export const GUIDES: { href: string; title: string; text: string; icon: IconKey }[] = [
+  { href: "/accessibility.html", title: "Accessibility", text: "Floating ♿ button: contrast, text size, dyslexia font, colour-blind filters, reduced motion, speak on focus.", icon: "accessibility" },
+  { href: "/grid.html", title: "Data grid", text: "Search, sort, pages, selection, CSV, five themes and keyboard navigation, with the engine and time shown.", icon: "grid" },
+  { href: "/agents.html", title: "Grid agents", text: "Ask the data in plain words, multi-step tasks, custom rules, WebMCP tools for browser agents.", icon: "robot" },
+  { href: "/ask.html", title: "Ask page (RAG)", text: "Answers from the page itself with the source highlighted. Nothing is sent anywhere.", icon: "chat" },
+  { href: "/page-tools.html", title: "Page tools", text: "Copilot, QA report with 15 WCAG checks, form review, design review and voice commands.", icon: "tools" },
+  { href: "/nextjs.html", title: "Next.js setup", text: "Pick the buttons you want and copy a ready YuktAIWrapper layout for the App Router.", icon: "code" },
+  { href: "/python.html", title: "Python (pip)", text: "pip install yuktai adds the widget and page tools to Django, Flask and FastAPI.", icon: "hub" },
+  { href: "/php.html", title: "PHP (Composer)", text: "composer require yuktishaalaa/yuktai for plain PHP, Laravel and WordPress.", icon: "layout" },
+  { href: "/jquery.html", title: "jQuery", text: "Two script tags on any jQuery site. Live demo with jQuery 1.12 to 4.0.", icon: "wand" },
+  { href: "/icons.html", title: "Icon studio", text: "Every YuktAI icon at any size and colour. Copy React or HTML, download PNG or SVG.", icon: "star" },
+  { href: "/playground.html", title: "Function playground", text: "Run the core functions on your own input and copy the call.", icon: "dataObject" },
+  { href: "/rust.html", title: "Rust engines", text: "Rust compiled to WebAssembly for grid search and page RAG. Time it against TypeScript.", icon: "speed" },
+];
+
+// Six ways in. One line each.
+export const STACKS = [
+  { badge: "JS", name: "JavaScript / HTML", code: `<script src="https://cdn.jsdelivr.net/npm/@yuktishaalaa/yuktai@${VERSIONS.yuktai}/vanilla/index.min.js"></script>`, href: "/#start", tone: "js" },
+  { badge: "TS", name: "React / Next.js", code: `npm i @yuktishaalaa/yuktai@${VERSIONS.yuktai}`, href: "/nextjs.html", tone: "ts" },
+  { badge: "$", name: "jQuery 1.12 – 4.0", code: `yuktai.renderGrid($("#staff")[0], { data, columns })`, href: "/jquery.html", tone: "jq" },
+  { badge: "Py", name: "Python", code: "pip install yuktai", href: "/python.html", tone: "py" },
+  { badge: "PHP", name: "PHP / Laravel / WordPress", code: "composer require yuktishaalaa/yuktai", href: "/php.html", tone: "php" },
+  { badge: "Rs", name: "Rust → WebAssembly", code: `engine: "rust"   // the default since 5.3.11`, href: "/rust.html", tone: "rs" },
+] as const;
+
+// W3Techs, share of all websites (November 2026)
+export const WEB_SHARE = [
+  { name: "jQuery", value: 64.2, how: "Two script tags" },
+  { name: "Bootstrap", value: 14.5, how: "One script tag" },
+  { name: "React", value: 6.0, how: "React components" },
+] as const;
+
+// Automated tests run before a release
+export const TESTS = [
+  { name: "TypeScript unit (Vitest)", value: 59, tone: "c1" },
+  { name: "Rust (cargo)", value: 13, tone: "c2" },
+  { name: "Browser end-to-end", value: 16, tone: "c3" },
+  { name: "Strict CSP + extension", value: 4, tone: "c4" },
+] as const;
+export const TEST_TOTAL = TESTS.reduce((n, t) => n + t.value, 0);
+
+export const STATS = [
+  { value: String(STACKS.length), label: "languages and stacks" },
+  { value: String(TEST_TOTAL), label: "automated tests per release" },
+  { value: "163", label: "accessible icons" },
+  { value: "0", label: "servers, API keys or tracking" },
+];
+
+export const STEPS = [
+  { title: "Reads the page", text: "Headings, paragraphs, lists and tables" },
+  { title: "Searches with BM25", text: "Rust compiled to WebAssembly" },
+  { title: "Quotes the best part", text: "With the source highlighted" },
+  { title: "Stays on the device", text: "0 bytes sent anywhere" },
+];
+
+export const COMPARE: [string, string, string][] = [
+  ["Where it runs", "Visitor's browser", "Vendor's servers"],
+  ["Cost", "Free, open source", "Monthly plan or per-question fees"],
+  ["API key", "None", "Required"],
+  ["Visitor data sent", "Nothing", "Questions and page text"],
+  ["Works offline", "After the first load", "No"],
+  ["Strict CSP sites", "Trusted Types ready", "Often blocked"],
+  ["Accessibility widget", "Included", "Usually separate"],
+];
+
+export const QUESTIONS = [
+  { label: "How do I install?", ask: "How do I install YuktAI?" },
+  { label: "Is my data safe?", ask: "Is my data sent to a server?" },
+  { label: "Works with jQuery?", ask: "Does it work with jQuery?" },
+  { label: "Why Rust?", ask: "Why does YuktAI use Rust?" },
+];

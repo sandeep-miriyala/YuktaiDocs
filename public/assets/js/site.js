@@ -160,9 +160,11 @@
 
   /* ── the version on this page ── */
   $$(".ver-text").forEach(function (el) { el.textContent = cfg.version; });
-  if (cfg.version !== "5.3.9") {
-    $$("pre code").forEach(function (c) { c.textContent = c.textContent.split("@5.3.9").join("@" + cfg.version); });
-  }
+  // code blocks always show the version this site runs (any @5.x.y in a YuktAI URL or install line)
+  $$("pre code").forEach(function (c) {
+    var t = c.textContent.replace(/(@yuktishaalaa\/yuktai@)\d+\.\d+\.\d+/g, "$1" + cfg.version);
+    if (t !== c.textContent) c.textContent = t;
+  });
   var banner = $("#docs-banner");
   function showBanner(html) {
     if (!banner) return;
