@@ -6,7 +6,7 @@
 //     release once and needed a refresh.)
 //   • the YuktAI script (jsDelivr or unpkg, a fixed version): cache first
 // Bump CACHE whenever you publish a change, so visitors get the new files.
-const CACHE = "yuktaidocs-v14"
+const CACHE = "yuktaidocs-v15"
 const CORE = [
   "/",
   "/accessibility/",
@@ -22,23 +22,6 @@ const CORE = [
   "/playground/",
   "/rust/",
   "/manifest.webmanifest",
-  "/assets/css/guide.css",
-  "/assets/icons.svg",
-  "/theme.js",
-  "/assets/js/analytics.js",
-  "/assets/js/config.js",
-  "/assets/js/site-next.js",
-  "/assets/js/data.js",
-  "/assets/js/pages/accessibility.js",
-  "/assets/js/pages/grid.js",
-  "/assets/js/pages/agents.js",
-  "/assets/js/pages/ask.js",
-  "/assets/js/pages/page-tools.js",
-  "/assets/js/pages/nextjs.js",
-  "/assets/js/pages/icons.js",
-  "/assets/js/pages/playground.js",
-  "/assets/js/pages/rust.js",
-  "/assets/js/pages/jquery.js",
   "/icons/favicon.svg",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
@@ -95,7 +78,7 @@ self.addEventListener("fetch", (event) => {
     const fresh = await (cached ? Promise.race([network, timeout(4000)]) : network)
     if (fresh) return fresh
     if (cached) return cached
-    if (request.mode === "navigate") return (await cache.match("404.html")) || (await cache.match("./")) || Response.error()
+    if (request.mode === "navigate") return (await cache.match("/")) || Response.error()
     return Response.error()
   })())
 })

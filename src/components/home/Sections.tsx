@@ -1,6 +1,6 @@
 import { CheckIcon, ArrowRightIcon } from "@yuktishaalaa/yuktai/icons";
 import {
-  COMPARE, GUIDES, LINKS, STACKS, STATS, STEPS, TESTS, TEST_TOTAL, VERSIONS, WEB_SHARE,
+  COMPARE, GUIDES, LINKS, PACKAGES, STACKS, STATS, STEPS, TESTS, TEST_TOTAL, VERSIONS, WEB_SHARE,
 } from "@/data/site";
 import { GuideIcon } from "../Icon";
 
@@ -155,6 +155,36 @@ export function Start() {
         <pre><code>{`<script src="https://cdn.jsdelivr.net/npm/@yuktishaalaa/yuktai@${VERSIONS.yuktai}/vanilla/index.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@yuktishaalaa/ask-page@${VERSIONS.askPage}/dist/ask-page.global.js"></script>`}</code></pre>
       </div>
+    </section>
+  );
+}
+
+export function Packages() {
+  return (
+    <section id="packages" className="wrap">
+      <Kicker>npm packages</Kicker>
+      <h2>Two packages, both free on npm</h2>
+      <p className="lead">This site is built with both of them. Install one or both.</p>
+      <ul className="pkg-grid">
+        {PACKAGES.map((p) => (
+          <li key={p.name} className="pkg">
+            <div className="pkg-head">
+              <span className="iconbox"><GuideIcon name={p.icon} /></span>
+              <div>
+                <strong className="pkg-name">{p.name}</strong>
+                <span className="pkg-ver">v{p.version} · GPL-3.0</span>
+              </div>
+            </div>
+            <p>{p.text}</p>
+            <code className="pkg-install">{p.install}</code>
+            <p className="pkg-site"><strong>On this site:</strong> {p.onThisSite}</p>
+            <p className="pkg-links">
+              <a href={p.npm}>npm <ArrowRightIcon size={16} aria-hidden="true" /></a>
+              <a href={p.cdn}>jsDelivr <ArrowRightIcon size={16} aria-hidden="true" /></a>
+            </p>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

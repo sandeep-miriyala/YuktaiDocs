@@ -89,3 +89,27 @@ export const QUESTIONS = [
   { label: "Works with jQuery?", ask: "Does it work with jQuery?" },
   { label: "Why Rust?", ask: "Why does YuktAI use Rust?" },
 ];
+
+// The two npm packages this site is built with (both in package.json)
+export const PACKAGES = [
+  {
+    name: "@yuktishaalaa/yuktai",
+    version: VERSIONS.yuktai,
+    text: "Accessibility, AI and data toolkit for Next.js, React and plain HTML: WCAG 2.2 auto-fix, agentic data grid, accessibility copilot, QA reports, page RAG and 163 icons. Rust engines in WebAssembly. Zero API keys.",
+    install: `npm i @yuktishaalaa/yuktai@${VERSIONS.yuktai}`,
+    npm: LINKS.npmYuktai,
+    cdn: `https://www.jsdelivr.com/package/npm/@yuktishaalaa/yuktai`,
+    onThisSite: "♿ and 🛠 buttons, the data grid, agents, icon studio, every icon",
+    icon: "accessibility",
+  },
+  {
+    name: "@yuktishaalaa/ask-page",
+    version: VERSIONS.askPage,
+    text: "Ask any web page. A side panel that answers from the page itself with sources highlighted. Rust/WASM search, on-device AI, WebMCP tools, nothing sent anywhere.",
+    install: `npm i @yuktishaalaa/ask-page@${VERSIONS.askPage}`,
+    npm: LINKS.npmAsk,
+    cdn: `https://www.jsdelivr.com/package/npm/@yuktishaalaa/ask-page`,
+    onThisSite: "\"Ask these docs\", the hero box and Ctrl + K",
+    icon: "chat",
+  },
+] as const;

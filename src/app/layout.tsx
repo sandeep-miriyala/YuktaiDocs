@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+import Analytics from "@/components/Analytics";
 import Header from "@/components/Header";
 import Providers from "@/components/Providers";
 import { LINKS, VERSIONS } from "@/data/site";
@@ -8,7 +10,6 @@ export const metadata: Metadata = {
   title: "YuktaiDocs: docs that answer you, right in your browser",
   description:
     "YuktAI: open-source accessibility widget, data grid, page Q&A and agents with Rust search in WebAssembly. One script tag, no server, no API key.",
-  manifest: "/manifest.webmanifest",
   icons: { icon: "/icons/favicon.svg", apple: "/icons/apple-touch-icon.png" },
 };
 
@@ -23,8 +24,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* the saved light / dark choice, before first paint (same key as the guide pages) */}
-        <script src="/theme.js" />
+        {/* the saved light / dark choice, before first paint */}
+        <Script id="theme" strategy="beforeInteractive">
+          {`try{var t=localStorage.getItem("docs-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`}
+        </Script>
       </head>
       <body>
         <a className="skip" href="#main">Skip to content</a>
@@ -40,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </footer>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChatIcon, MoonIcon, SunIcon } from "@yuktishaalaa/yuktai/icons";
-import { LINKS, VERSIONS } from "@/data/site";
+import { ChatIcon, MoonIcon, NamaskarIcon, SunIcon } from "@yuktishaalaa/yuktai/icons";
+import InstallButton from "./InstallButton";
+import { LINKS } from "@/data/site";
 import { ask } from "./ask";
 
 export default function Header() {
@@ -25,17 +26,18 @@ export default function Header() {
     <header className="topbar">
       <div className="topbar-in">
         <a className="brand" href="/">
-          <span className="brandmark" aria-hidden="true">Y</span>
+          <span className="brandmark" aria-hidden="true"><NamaskarIcon size={22} /></span>
           <span>YuktaiDocs</span>
         </a>
-        <span className="ver-chip">YuktAI {VERSIONS.yuktai} · Ask page {VERSIONS.askPage}</span>
         <nav className="topnav" aria-label="Main">
           <a href="/#guides">Docs</a>
+          <a href="/#packages">Packages</a>
           <a href="/#stacks">Languages</a>
           <a href="/#why">Why YuktAI</a>
           <a href={LINKS.github}>GitHub</a>
         </nav>
         <div className="tools">
+          <InstallButton />
           <button type="button" className="ask-btn" onClick={() => ask()} aria-keyshortcuts="Control+K">
             <ChatIcon size={18} aria-hidden="true" />
             <span className="ask-text">Ask these docs…</span>

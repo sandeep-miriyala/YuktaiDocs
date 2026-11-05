@@ -19,7 +19,10 @@ npm run build    # writes out/
 |---|---|
 | `src/data/site.ts` | Versions, numbers, links. Change a release here. |
 | `src/app/page.tsx` | Home page |
-| `src/components/` | Header, hero, charts, Ask panel and YuktAI setup |
 | `src/app/(guides)/<name>/page.tsx` | The 12 guides (`/grid/`, `/jquery/`, …) |
-| `public/assets/js/pages/*.js` | The live demo for each guide |
+| `src/lib/docs/pages/<name>.ts` | The live demo on each guide |
+| `src/lib/docs/runtime.ts` | Shared demo helpers; loads YuktAI from npm (Rust engines built in) |
+| `src/app/manifest.ts`, `public/sw.js`, `src/components/InstallButton.tsx` | Installable app (PWA), works offline |
 | `public/_redirects` | Old `.html` addresses → the new routes |
+
+Icons everywhere come from `@yuktishaalaa/yuktai/icons`.

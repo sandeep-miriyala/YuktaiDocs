@@ -1,6 +1,7 @@
-// icons: moved from icons.html to a Next.js route. The live demos run the same scripts as before.
+// icons: Next.js route. Icons from @yuktishaalaa/yuktai/icons; the live demo is src/lib/docs/pages/icons.ts.
 import type { Metadata } from "next";
-import GuideScripts from "@/components/guides/GuideScripts";
+import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
+import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
   title: "Icon studio · YuktaiDocs",
@@ -12,14 +13,14 @@ export default function IconsPage() {
     <>
       {" "}
 <div className={"page-head"}>{" "}
-<p className={"kicker"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-star"} /></svg>{"Icon studio"}</p>{" "}
+<p className={"kicker"}><YuktaiIcon name="star" className="i" size={24} aria-hidden="true" />{"Icon studio"}</p>{" "}
 <h1>{"Icon studio"}</h1><p className={"lead"}>{"Every YuktAI icon, read live from the YuktAI script, so new icons appear here as soon as a release adds them. Type any size, pick a colour and style, then copy the code or download a PNG or SVG."}</p></div>{" "}
 <div className={"callout"}><p><strong>{"Original designs:"}</strong>{" every YuktAI icon is drawn for YuktAI and free to use under GPL-3.0. Checked against Lucide (2,176 icons) and Feather (287 icons): no icon, and no single line, is the same. In 5.3.11, 13 icons (plus, minus, reset, search, sortUp, sortDown, left, right, first, last, undo, redo, pen) get their original YuktAI shapes, and the palette icon is clearer."}</p></div>{" "}
 <div className={"card st-panel"}>{" "}
 <div className={"st-controls"}>{" "}
 <div className={"st-field st-search"}>{" "}
 <label htmlFor={"st-q"}>{"Search icons"}</label>{" "}
-<span className={"st-input"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-search"} /></svg><input id={"st-q"} type={"search"} placeholder={"home, lock, chart…"} autoComplete={"off"} spellCheck={"false"} /></span>{" "}
+<span className={"st-input"}><YuktaiIcon name="search" className="i" size={24} aria-hidden="true" /><input id={"st-q"} type={"search"} placeholder={"home, lock, chart…"} autoComplete={"off"} spellCheck={"false"} /></span>{" "}
 </div>{" "}
 <fieldset className={"st-seg"}><legend>{"Style"}</legend><label><input type={"radio"} name={"st-variant"} defaultValue={"outline"} defaultChecked /><span>{"Outline"}</span></label><label><input type={"radio"} name={"st-variant"} defaultValue={"filled"} /><span>{"Filled"}</span></label></fieldset>{" "}
 <fieldset className={"st-seg"} id={"st-shape-field"} hidden><legend>{"Shape"}</legend><label><input type={"radio"} name={"st-shape"} defaultValue={"rounded"} defaultChecked /><span>{"Rounded"}</span></label><label><input type={"radio"} name={"st-shape"} defaultValue={"circle"} /><span>{"Circle"}</span></label></fieldset>{" "}
@@ -45,25 +46,25 @@ export default function IconsPage() {
 <h2 className={"st-name"} id={"st-name"}>{"accessibility"}</h2>{" "}
 <p className={"st-contrast"} id={"st-contrast"}></p>{" "}
 <div className={"st-codes"}>{" "}
-<div className={"st-code"}><span className={"st-code-label"}>{"React / Next.js"}</span><code id={"st-react"}></code><button type={"button"} className={"st-btn"} data-copy={"react"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-copy"} /></svg><span>{"Copy"}</span></button></div>{" "}
-<div className={"st-code"}><span className={"st-code-label"}>{"Plain HTML"}</span><code id={"st-html"}></code><button type={"button"} className={"st-btn"} data-copy={"html"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-copy"} /></svg><span>{"Copy"}</span></button></div>{" "}
+<div className={"st-code"}><span className={"st-code-label"}>{"React / Next.js"}</span><code id={"st-react"}></code><button type={"button"} className={"st-btn"} data-copy={"react"}><YuktaiIcon name="copy" className="i" size={24} aria-hidden="true" /><span>{"Copy"}</span></button></div>{" "}
+<div className={"st-code"}><span className={"st-code-label"}>{"Plain HTML"}</span><code id={"st-html"}></code><button type={"button"} className={"st-btn"} data-copy={"html"}><YuktaiIcon name="copy" className="i" size={24} aria-hidden="true" /><span>{"Copy"}</span></button></div>{" "}
 </div>{" "}
 <div className={"st-actions"}>{" "}
-<button type={"button"} className={"st-btn primary"} id={"st-png"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-download"} /></svg><span id={"st-png-label"}>{"Download PNG · 24px"}</span></button>{" "}
-<button type={"button"} className={"st-btn"} id={"st-svg"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-download"} /></svg><span>{"SVG"}</span></button>{" "}
-<button type={"button"} className={"st-btn"} data-copy={"svg"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-copy"} /></svg><span>{"Copy SVG"}</span></button>{" "}
+<button type={"button"} className={"st-btn primary"} id={"st-png"}><YuktaiIcon name="download" className="i" size={24} aria-hidden="true" /><span id={"st-png-label"}>{"Download PNG · 24px"}</span></button>{" "}
+<button type={"button"} className={"st-btn"} id={"st-svg"}><YuktaiIcon name="download" className="i" size={24} aria-hidden="true" /><span>{"SVG"}</span></button>{" "}
+<button type={"button"} className={"st-btn"} data-copy={"svg"}><YuktaiIcon name="copy" className="i" size={24} aria-hidden="true" /><span>{"Copy SVG"}</span></button>{" "}
 </div>{" "}
 <form className={"st-multi"} id={"st-multi"}>{" "}
 <label htmlFor={"st-sizes"}>{"Several PNG sizes at once"}</label>{" "}
 <span className={"st-multirow"}><input id={"st-sizes"} className={"input"} defaultValue={"16, 32, 48, 180, 192, 512"} autoComplete={"off"} aria-describedby={"st-sizes-hint"} />{" "}
-<button type={"submit"} className={"st-btn"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-download"} /></svg><span>{"Download all"}</span></button></span>{" "}
+<button type={"submit"} className={"st-btn"}><YuktaiIcon name="download" className="i" size={24} aria-hidden="true" /><span>{"Download all"}</span></button></span>{" "}
 <span className={"hint"} id={"st-sizes-hint"}>{"Comma-separated, 8–1024. Handy for favicons and app icons. Your browser may ask to allow several downloads."}</span>{" "}
 </form>{" "}
 </div>{" "}
 </div>{" "}
 <section className={"st-all"} aria-labelledby={"st-all-title"}>{" "}
 <div className={"st-all-head"}>{" "}
-<h2 id={"st-all-title"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-download"} /></svg>{"Download all icons"}</h2>{" "}
+<h2 id={"st-all-title"}><YuktaiIcon name="download" className="i" size={24} aria-hidden="true" />{"Download all icons"}</h2>{" "}
 <p className={"hint"}>{"Uses the style, colour, shape, size and line weight you chose above."}</p>{" "}
 </div>{" "}
 <div className={"st-all-opts"}>{" "}
@@ -79,10 +80,10 @@ export default function IconsPage() {
 </fieldset>{" "}
 </div>{" "}
 <div className={"st-all-actions"}>{" "}
-<button type={"button"} className={"st-btn primary"} id={"st-sheet"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-image"} /></svg><span>{"One picture (PNG)"}</span></button>{" "}
-<button type={"button"} className={"st-btn"} id={"st-zip-svg"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-file"} /></svg><span>{"ZIP of SVG files"}</span></button>{" "}
-<button type={"button"} className={"st-btn"} id={"st-zip-png"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-grid"} /></svg><span>{"ZIP of PNG files"}</span></button>{" "}
-<button type={"button"} className={"st-btn"} id={"st-sprite"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-code"} /></svg><span>{"SVG sprite (developers)"}</span></button>{" "}
+<button type={"button"} className={"st-btn primary"} id={"st-sheet"}><YuktaiIcon name="image" className="i" size={24} aria-hidden="true" /><span>{"One picture (PNG)"}</span></button>{" "}
+<button type={"button"} className={"st-btn"} id={"st-zip-svg"}><YuktaiIcon name="file" className="i" size={24} aria-hidden="true" /><span>{"ZIP of SVG files"}</span></button>{" "}
+<button type={"button"} className={"st-btn"} id={"st-zip-png"}><YuktaiIcon name="grid" className="i" size={24} aria-hidden="true" /><span>{"ZIP of PNG files"}</span></button>{" "}
+<button type={"button"} className={"st-btn"} id={"st-sprite"}><YuktaiIcon name="code" className="i" size={24} aria-hidden="true" /><span>{"SVG sprite (developers)"}</span></button>{" "}
 </div>{" "}
 <p className={"st-all-status"} id={"st-all-status"} role={"status"} aria-live={"polite"}></p>{" "}
 <p className={"hint st-all-note"}>{"The picture shows icons at your size up to 128 px; ZIP files use your exact size. Everything is made in your browser, offline too."}</p>{" "}
@@ -97,26 +98,26 @@ export default function IconsPage() {
 <h2 id={"howto"}>{"Use an icon"}</h2>{" "}
 <div className={"grid2"}>{" "}
 <div className={"card"}>{" "}
-<h3><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-code"} /></svg>{" React / Next.js"}</h3>{" "}
+<h3><YuktaiIcon name="code" className="i" size={24} aria-hidden="true" />{" React / Next.js"}</h3>{" "}
 <ol className={"steps"}>{" "}
 <li><code>{"npm install @yuktishaalaa/yuktai"}</code></li>{" "}
 <li>{"Copy the "}<strong>{"React / Next.js"}</strong>{" line from the studio. Icon components work in Server Components too."}</li>{" "}
 </ol>{" "}
-<div className={"snippet"}><div className={"codehead"}><span className={"file"}>{"app/page.tsx"}</span><button type={"button"} className={"copy-btn"} data-what={"app/page.tsx"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-copy"} /></svg><span className={"copy-label"}>{"Copy"}</span><span className={"sr-only"}>{" app/page.tsx"}</span></button></div><pre><code>{"import { EyeOffIcon } from \"@yuktishaalaa/yuktai/icons\"\n\n<EyeOffIcon size={40} color=\"#084d31\" label=\"Hide password\" />\n<EyeOffIcon size={40} color=\"#084d31\" variant=\"filled\" shape=\"circle\" />"}</code></pre></div>{" "}
+<div className={"snippet"}><div className={"codehead"}><span className={"file"}>{"app/page.tsx"}</span><button type={"button"} className={"copy-btn"} data-what={"app/page.tsx"}><YuktaiIcon name="copy" className="i" size={24} aria-hidden="true" /><span className={"copy-label"}>{"Copy"}</span><span className={"sr-only"}>{" app/page.tsx"}</span></button></div><pre><code>{"import { EyeOffIcon } from \"@yuktishaalaa/yuktai/icons\"\n\n<EyeOffIcon size={40} color=\"#084d31\" label=\"Hide password\" />\n<EyeOffIcon size={40} color=\"#084d31\" variant=\"filled\" shape=\"circle\" />"}</code></pre></div>{" "}
 </div>{" "}
 <div className={"card"}>{" "}
-<h3><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-file"} /></svg>{" Plain HTML"}</h3>{" "}
+<h3><YuktaiIcon name="file" className="i" size={24} aria-hidden="true" />{" Plain HTML"}</h3>{" "}
 <ol className={"steps"}>{" "}
 <li>{"Add the YuktAI script once, before "}<code>{"</body>"}</code>{"."}</li>{" "}
 <li>{"Copy the "}<strong>{"Plain HTML"}</strong>{" code from the studio; it fills a placeholder with the SVG."}</li>{" "}
 </ol>{" "}
-<div className={"snippet"}><div className={"codehead"}><span className={"file"}>{"index.html"}</span><button type={"button"} className={"copy-btn"} data-what={"index.html"}><svg className={"i"} aria-hidden={"true"} focusable={"false"}><use href={"/assets/icons.svg#i-copy"} /></svg><span className={"copy-label"}>{"Copy"}</span><span className={"sr-only"}>{" index.html"}</span></button></div><pre><code>{"<span id=\"my-icon\"></span>\n<script>\n  document.getElementById(\"my-icon\").innerHTML =\n    yuktai.icon(\"eyeOff\", { size: 40, color: \"#084d31\", strokeWidth: 2.5, label: \"Hide password\" })\n</script>"}</code></pre></div>{" "}
+<div className={"snippet"}><div className={"codehead"}><span className={"file"}>{"index.html"}</span><button type={"button"} className={"copy-btn"} data-what={"index.html"}><YuktaiIcon name="copy" className="i" size={24} aria-hidden="true" /><span className={"copy-label"}>{"Copy"}</span><span className={"sr-only"}>{" index.html"}</span></button></div><pre><code>{"<span id=\"my-icon\"></span>\n<script>\n  document.getElementById(\"my-icon\").innerHTML =\n    yuktai.icon(\"eyeOff\", { size: 40, color: \"#084d31\", strokeWidth: 2.5, label: \"Hide password\" })\n</script>"}</code></pre></div>{" "}
 <p className={"hint"}>{"No script? Use "}<strong>{"Copy SVG"}</strong>{" and paste it into your HTML, or use the downloaded file in an "}<code>{"<img>"}</code>{" with a meaningful "}<code>{"alt"}</code>{"."}</p>{" "}
 </div>{" "}
 </div>{" "}
 <div className={"callout"}><p>{"Add "}<code>{"label"}</code>{" when the icon means something on its own; leave it out when the text next to it says the same, so screen readers don't repeat it. Icons need 3:1 contrast with their background (WCAG 1.4.11); the studio checks it for you."}</p></div>{" "}
 
-      <GuideScripts scripts={["/assets/js/pages/icons.js"]} />
+      <GuideDemo page="icons" />
     </>
   );
 }
