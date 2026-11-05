@@ -34,6 +34,7 @@ export default function Header() {
           <a href="/#packages">Packages</a>
           <a href="/#stacks">Languages</a>
           <a href="/#why">Why YuktAI</a>
+          <a href="/about/">How it&apos;s built</a>
           <a href={LINKS.github}>GitHub</a>
         </nav>
         <div className="tools">

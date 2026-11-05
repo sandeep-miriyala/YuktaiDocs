@@ -19,6 +19,7 @@ npm run build    # writes out/
 |---|---|
 | `src/data/site.ts` | Versions, numbers, links. Change a release here. |
 | `src/app/page.tsx` | Home page |
+| `src/app/about/page.tsx` | How this site is built: stack (TanStack Table), live npm data (TanStack Query) |
 | `src/app/(guides)/<name>/page.tsx` | The 12 guides (`/grid/`, `/jquery/`, …) |
 | `src/lib/docs/pages/<name>.ts` | The live demo on each guide |
 | `src/lib/docs/runtime.ts` | Shared demo helpers; loads YuktAI from npm (Rust engines built in) |
