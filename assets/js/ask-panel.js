@@ -52,6 +52,25 @@
     var q = e.target.closest("[data-ask]");
     if (q && el.askQuestion) el.askQuestion(q.getAttribute("data-ask"));
   });
+  // Home hero: the big "Ask anything" box sends its question to the panel
+  document.addEventListener("submit", function (e) {
+    var form = e.target.closest && e.target.closest("#hero-ask");
+    if (!form) return;
+    e.preventDefault();
+    var input = form.querySelector("input"), q = input.value.trim(), el = panel();
+    if (!el) return;
+    if (q && el.askQuestion) { el.askQuestion(q); input.value = ""; }
+    else if (el.openPanel) el.openPanel();
+  });
+  // Ctrl + K (⌘ K on Mac) opens Ask from any page, like most modern docs
+  document.addEventListener("keydown", function (e) {
+    if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && (e.key === "k" || e.key === "K")) {
+      var el = panel();
+      if (!el || !el.openPanel) return;
+      e.preventDefault();
+      el.openPanel();
+    }
+  });
   document.addEventListener("docs:theme", syncTheme);
   if (window.matchMedia) {
     var mq = window.matchMedia("(prefers-color-scheme: dark)");

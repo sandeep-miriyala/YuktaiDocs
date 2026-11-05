@@ -25,7 +25,7 @@
     <a class="brand" href="./"><span class="brandmark"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-namaskar"/></svg></span><span>YuktaiDocs</span></a>
     <span class="ver-chip" title="YuktAI version used on this site">v<span class="ver-text">5.3.12</span></span>
     <div class="tools">
-      <button type="button" class="ask-btn" id="ask-btn" aria-keyshortcuts="Control+/" title="Ask these docs (Ctrl + /)"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg><span class="ask-text">Ask</span><span class="sr-only"> these docs</span></button>
+      <button type="button" class="ask-btn" id="ask-btn" aria-keyshortcuts="Control+K Control+/" title="Ask these docs (Ctrl + K)"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg><span class="ask-text">Ask these docs…</span><span class="kbd" aria-hidden="true">Ctrl K</span></button>
       <button type="button" class="install-btn" id="install-btn" hidden><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-install"/></svg><span>Install app</span></button>
       <span class="icon-btn net-chip" id="net-chip" role="img" aria-label="Network status"></span>
       <button type="button" class="icon-btn" id="theme-btn" aria-pressed="false"><span id="theme-icon"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-moon"/></svg></span><span class="sr-only">Dark theme</span></button>
@@ -49,6 +49,18 @@
   <li><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-check"/></svg><span>No jQuery plugin to install or update. YuktAI doesn't need jQuery at all.</span></li>
   <li><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-check"/></svg><span>No API keys, no server calls. Everything runs in the visitor's browser.</span></li>
 </ul>
+
+
+<div class="demo"><p class="demo-label"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-play"/></svg>Live demo</p>
+  <h2 style="margin-top:0" id="demo">Try it with any jQuery version</h2>
+  <div class="controls">
+    <div class="field"><label for="jq-ver">jQuery version</label><select id="jq-ver"><option value="4.0.0">4.0.0 (latest)</option><option value="3.7.1">3.7.1</option><option value="2.2.4">2.2.4</option><option value="1.12.4">1.12.4</option></select></div>
+  </div>
+  <p class="hint" id="jq-status" role="status" aria-live="polite">Loading jQuery…</p>
+  <div class="btn-row"><button type="button" class="btn" id="jq-contrast" aria-pressed="false"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-accessibility"/></svg><span>High contrast</span></button><button type="button" class="btn" id="jq-ask"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg><span>Ask: which jQuery versions work?</span></button></div>
+  <div id="jq-grid"></div>
+  <p class="hint">The buttons and the grid are wired with jQuery (<code>$(function () { … })</code>, <code>$("#id").on("click")</code>). Full example: <a href="https://github.com/sandeep-miriyala/yuktai/tree/main/examples/jquery" target="_blank" rel="noopener noreferrer">examples/jquery on GitHub<span class="sr-only"> (opens in a new tab)</span></a></p>
+</div>
 
 <h2 id="add">1. Add the scripts</h2>
 <p>Put these just before <code>&lt;/body&gt;</code>, after the jQuery you already have.</p>
@@ -80,6 +92,7 @@
 })</code></pre></div></div>
 
 <h2 id="versions">3. Which jQuery versions work</h2>
+<p>YuktAI and Ask page work with every jQuery we tested: 1.12.4, 2.2.4, 3.7.1 and 4.0.0. Use 4.0 for new sites and 3.7 for older code.</p>
 <table class="ref"><caption>Tested in Chromium with YuktAI 5.3.12 and Ask page 1.0.0</caption><thead><tr><th scope="col">jQuery</th><th scope="col">Status</th><th scope="col">Notes</th></tr></thead><tbody>
 <tr><td>1.12.4</td><td>✅ Works</td><td>Old sites. Plan an upgrade: 1.x no longer gets security fixes.</td></tr>
 <tr><td>2.2.4</td><td>✅ Works</td><td>Old sites. Same advice as 1.x.</td></tr>
@@ -138,6 +151,6 @@
 <script src="assets/js/ask-page.global.js" defer></script>
 <script src="assets/js/config.js" defer></script>
 <script src="assets/js/site.js" defer></script>
-<script src="assets/js/data.js" defer></script>
+<script src="assets/js/data.js" defer></script><script src="assets/js/pages/jquery.js" defer></script>
 </body>
 </html>

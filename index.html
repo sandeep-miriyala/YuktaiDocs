@@ -27,7 +27,7 @@
     <a class="brand" href="./"><span class="brandmark"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-namaskar"/></svg></span><span>YuktaiDocs</span></a>
     <span class="ver-chip" title="YuktAI version used on this site">v<span class="ver-text">5.3.12</span></span>
     <div class="tools">
-      <button type="button" class="ask-btn" id="ask-btn" aria-keyshortcuts="Control+/" title="Ask these docs (Ctrl + /)"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg><span class="ask-text">Ask</span><span class="sr-only"> these docs</span></button>
+      <button type="button" class="ask-btn" id="ask-btn" aria-keyshortcuts="Control+K Control+/" title="Ask these docs (Ctrl + K)"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg><span class="ask-text">Ask these docs…</span><span class="kbd" aria-hidden="true">Ctrl K</span></button>
       <button type="button" class="install-btn" id="install-btn" hidden><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-install"/></svg><span>Install app</span></button>
       <span class="icon-btn net-chip" id="net-chip" role="img" aria-label="Network status"></span>
       <button type="button" class="icon-btn" id="theme-btn" aria-pressed="false"><span id="theme-icon"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-moon"/></svg></span><span class="sr-only">Dark theme</span></button>
@@ -43,9 +43,41 @@
     <p class="side-note">Every demo runs YuktAI <span class="ver-text">5.3.12</span> in your browser. No API keys, no server.</p>
   </nav>
   <main id="main" tabindex="-1">
-    <div class="page-head">
-      <p class="kicker"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-home"/></svg>Home</p>
-      <h1>YuktAI, documented and running live</h1><p class="lead">YuktAI is an open-source toolkit for accessible, AI-assisted web apps: an accessibility widget, a data grid you can talk to, page Q&amp;A, agents, icons and optional Rust engines. Use it in Next.js / React or in plain HTML with one script tag. Everything on this site runs in your browser, with no API keys and no server.</p></div><div class="demo"><p class="demo-label"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-play"/></svg>Live status</p>
+    <section class="hero" aria-labelledby="hero-h">
+      <p class="hero-badge"><b>NEW</b> Ask page 1.0 · WebMCP connects by itself</p>
+      <h1 id="hero-h">Docs that <span class="grad">answer you</span>, right in your browser</h1>
+      <p class="lead">YuktAI is an open-source toolkit for accessible, AI-assisted web apps: an accessibility widget, a data grid you can talk to, page Q&amp;A, agents, icons and Rust engines. Use it in Next.js / React or in plain HTML with one script tag.</p>
+      <form class="hero-ask" id="hero-ask" role="search">
+        <svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg>
+        <label for="hero-q" class="sr-only">Ask these docs</label>
+        <input id="hero-q" name="q" type="text" placeholder="Ask anything about YuktAI…" autocomplete="off" enterkeyhint="send">
+        <span class="kbd" aria-hidden="true">Ctrl K</span>
+        <button class="btn primary" type="submit"><span>Ask</span><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-arrowRight"/></svg></button>
+      </form>
+      <ul class="chips" aria-label="Try a question">
+        <li><button type="button" class="chip" data-ask="How do I install YuktAI?">How do I install?</button></li>
+        <li><button type="button" class="chip" data-ask="Is my data sent to a server?">Is my data safe?</button></li>
+        <li><button type="button" class="chip" data-ask="Does it work with plain HTML?">Plain HTML?</button></li>
+        <li><button type="button" class="chip" data-ask="What do the Rust engines do?">Why Rust?</button></li>
+      </ul>
+      <div class="ai-preview" aria-hidden="true">
+        <p class="q">“Is my data sent to a server?”</p>
+        <p class="a">No. Accessibility fixes, grid questions, page search and the Rust engines all run in the visitor's browser<span class="caret"></span></p>
+        <span class="src">Source · Private by design</span>
+      </div>
+      <ul class="trust" aria-label="At a glance">
+        <li><span class="num"><span class="grad">0</span></span><span>servers, API keys or tracking. Runs on the device</span></li>
+        <li><span class="num"><span class="grad">Rust</span></span><span>+ WebAssembly search, TypeScript fallback</span></li>
+        <li><span class="num"><span class="grad">163</span></span><span>icons, 13 guides, live demos on every page</span></li>
+        <li><span class="num"><span class="grad">AAA</span></span><span>colour contrast, keyboard and screen reader first</span></li>
+      </ul>
+      <div class="hero-cta">
+        <a class="btn primary" href="#install"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-install"/></svg>Get started</a>
+        <a class="btn" href="ask.html"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-chat"/></svg>See Ask page</a>
+        <a class="btn" href="https://github.com/sandeep-miriyala/yuktai"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-star"/></svg>GitHub</a>
+      </div>
+    </section>
+<div class="demo"><p class="demo-label"><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-play"/></svg>Live status</p>
       <h2 style="margin-top:0">What is running on this page</h2>
       <ul class="status-list" id="home-status" aria-live="polite">
         <li><svg class="i" aria-hidden="true" focusable="false"><use href="assets/icons.svg#i-check"/></svg>YuktAI <span class="ver-text">5.3.12</span></li>
