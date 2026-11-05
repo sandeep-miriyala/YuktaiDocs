@@ -1,53 +1,49 @@
-// YuktaiDocs service worker: the whole site works offline after the first visit.
+// YuktaiDocs service worker (Next.js site): the whole site works offline after the first visit.
+// The Next.js files under /_next/ are cached as they are fetched (network first).
 //   • this site's files: network first, so a new release shows on the first
 //     visit; the cache answers when offline or when the network takes > 4 s.
 //     (Before v7 the cache came first, so a returning visitor saw the old
 //     release once and needed a refresh.)
 //   • the YuktAI script (jsDelivr or unpkg, a fixed version): cache first
 // Bump CACHE whenever you publish a change, so visitors get the new files.
-const CACHE = "yuktaidocs-v13"
+const CACHE = "yuktaidocs-v14"
 const CORE = [
-  "./",
-  "index.html",
-  "accessibility.html",
-  "grid.html",
-  "agents.html",
-  "ask.html",
-  "page-tools.html",
-  "nextjs.html",
-  "icons.html",
-  "playground.html",
-  "rust.html",
-  "python.html",
-  "php.html",
-  "jquery.html",
-  "404.html",
-  "manifest.webmanifest",
-  "assets/css/site.css",
-  "assets/icons.svg",
-  "assets/js/theme.js",
-  "assets/js/analytics.js",
-  "assets/js/config.js",
-  "assets/js/ask-panel.js",
-  "assets/js/ask-page.global.js",
-  "assets/js/site.js",
-  "assets/js/data.js",
-  "assets/js/pages/home.js",
-  "assets/js/pages/accessibility.js",
-  "assets/js/pages/grid.js",
-  "assets/js/pages/agents.js",
-  "assets/js/pages/ask.js",
-  "assets/js/pages/page-tools.js",
-  "assets/js/pages/nextjs.js",
-  "assets/js/pages/icons.js",
-  "assets/js/pages/playground.js",
-  "assets/js/pages/rust.js",
-  "assets/js/pages/jquery.js",
-  "icons/favicon.svg",
-  "icons/icon-192.png",
-  "icons/icon-512.png",
-  "icons/maskable-512.png",
-  "icons/apple-touch-icon.png"
+  "/",
+  "/accessibility/",
+  "/grid/",
+  "/agents/",
+  "/ask/",
+  "/page-tools/",
+  "/nextjs/",
+  "/python/",
+  "/php/",
+  "/jquery/",
+  "/icons/",
+  "/playground/",
+  "/rust/",
+  "/manifest.webmanifest",
+  "/assets/css/guide.css",
+  "/assets/icons.svg",
+  "/theme.js",
+  "/assets/js/analytics.js",
+  "/assets/js/config.js",
+  "/assets/js/site-next.js",
+  "/assets/js/data.js",
+  "/assets/js/pages/accessibility.js",
+  "/assets/js/pages/grid.js",
+  "/assets/js/pages/agents.js",
+  "/assets/js/pages/ask.js",
+  "/assets/js/pages/page-tools.js",
+  "/assets/js/pages/nextjs.js",
+  "/assets/js/pages/icons.js",
+  "/assets/js/pages/playground.js",
+  "/assets/js/pages/rust.js",
+  "/assets/js/pages/jquery.js",
+  "/icons/favicon.svg",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
+  "/icons/maskable-512.png",
+  "/icons/apple-touch-icon.png"
 ]
 
 self.addEventListener("install", (event) => {

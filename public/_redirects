@@ -1,0 +1,14 @@
+# Old addresses (the site was plain HTML before Next.js) → the new routes
+/index.html  /  301
+/accessibility.html  /accessibility/  301
+/grid.html  /grid/  301
+/agents.html  /agents/  301
+/ask.html  /ask/  301
+/page-tools.html  /page-tools/  301
+/nextjs.html  /nextjs/  301
+/python.html  /python/  301
+/php.html  /php/  301
+/jquery.html  /jquery/  301
+/icons.html  /icons/  301
+/playground.html  /playground/  301
+/rust.html  /rust/  301

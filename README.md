@@ -20,4 +20,6 @@ npm run build    # writes out/
 | `src/data/site.ts` | Versions, numbers, links. Change a release here. |
 | `src/app/page.tsx` | Home page |
 | `src/components/` | Header, hero, charts, Ask panel and YuktAI setup |
-| `public/*.html` | Guide pages from the earlier site, moving to React one by one |
+| `src/app/(guides)/<name>/page.tsx` | The 12 guides (`/grid/`, `/jquery/`, …) |
+| `public/assets/js/pages/*.js` | The live demo for each guide |
+| `public/_redirects` | Old `.html` addresses → the new routes |

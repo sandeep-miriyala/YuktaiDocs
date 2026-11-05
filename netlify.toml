@@ -1,5 +1,6 @@
 # YuktaiDocs on Netlify (free): Next.js static export.
 # `npm run build` writes plain files to out/; Netlify serves them. No server, no functions.
+# Old .html addresses redirect to the new routes (public/_redirects).
 [build]
   command = "npm run build"
   publish = "out"
@@ -8,153 +9,18 @@
   NODE_VERSION = "22"
   NEXT_TELEMETRY_DISABLED = "1"
 
-# Every response
+# Every page. Next.js puts small inline scripts in each page, hence 'unsafe-inline';
+# outside scripts only from jsDelivr / unpkg (YuktAI for the live demos, jQuery) and Google Tag Manager.
+# worker-src blob: runs the Ask page search in a Web Worker; huggingface is only for the
+# optional Balanced mode model, downloaded once after the visitor agrees.
 [[headers]]
   for = "/*"
   [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), geolocation=(), microphone=(self)"
     X-Frame-Options = "DENY"
-
-# Pages built by Next.js. Next puts small inline scripts in each page, so these
-# allow 'unsafe-inline' scripts but nothing from other sites: YuktAI and Ask page
-# come from npm, bundled into the site.
-[[headers]]
-  for = "/"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/index.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/404.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-# Guide pages (plain HTML, until each one moves to React): the strict policy, no inline scripts.
-[[headers]]
-  for = "/accessibility"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/accessibility.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/grid"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/grid.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/agents"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/agents.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/ask"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/ask.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/page-tools"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/page-tools.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/nextjs"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/nextjs.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/python"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/python.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/php"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/php.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/jquery"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/jquery.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/icons"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/icons.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/playground"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/playground.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/rust"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
-
-[[headers]]
-  for = "/rust.html"
-  [headers.values]
-    Content-Security-Policy = "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com 'wasm-unsafe-eval'; default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://data.jsdelivr.com https://registry.npmjs.org https://huggingface.co https://*.huggingface.co https://*.hf.co https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; media-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
 
 # Next.js files have a hash in the name: cache them for a year.
 [[headers]]
