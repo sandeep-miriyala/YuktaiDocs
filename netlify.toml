@@ -3,7 +3,7 @@
 # Netlify serves them. No server, no functions.
 # Old .html addresses redirect to the new routes (public/_redirects).
 [build]
-  command = "rustup target add wasm32-unknown-unknown && npm run build"
+  command = "(rustup default stable && rustup target add wasm32-unknown-unknown) || echo \"Rust not available, using the TypeScript fallback\"; npm run build"
   publish = "out"
 
 [build.environment]
