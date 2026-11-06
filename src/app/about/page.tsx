@@ -3,9 +3,10 @@ import { ClockIcon, BrainIcon, ShieldCheckIcon, SpeedIcon, AccessibilityIcon, In
 import pkg from "../../../package.json";
 import StackTable, { type StackRow } from "@/components/about/StackTable";
 import LiveNpm from "@/components/about/LiveNpm";
+import EngineDemo from "@/components/ui/EngineDemo";
 
 export const metadata: Metadata = {
-  title: "How this site is built · YuktaiDocs",
+  title: "How this site is built",
   description: "The stack behind YuktaiDocs: Next.js, React, TypeScript, TanStack, Rust compiled to WebAssembly, YuktAI icons, a PWA, hosted free on Netlify.",
 };
 
@@ -22,9 +23,11 @@ const STACK: StackRow[] = [
   { layer: "Page Q&A", tool: "@yuktishaalaa/ask-page", version: v("@yuktishaalaa/ask-page"), why: "\"Ask these docs\", answers with the source" },
   { layer: "Data fetching", tool: "TanStack Query", version: v("@tanstack/react-query"), why: "Live npm versions on this page, cached" },
   { layer: "Tables", tool: "TanStack Table", version: v("@tanstack/react-table"), why: "This sortable table" },
-  { layer: "App", tool: "PWA: manifest + service worker", version: "—", why: "Install button, works offline" },
+  { layer: "App", tool: "PWA: manifest.json + service worker", version: "—", why: "Install button, works offline, new Y-of-agents icons" },
   { layer: "Hosting", tool: "Netlify (free plan)", version: "—", why: "Builds from GitHub, serves static files" },
-  { layer: "Testing", tool: "Playwright + Chromium", version: "—", why: "Every route checked for errors, phone and dark mode" },
+  { layer: "Created with", tool: "yuktai CLI (npx yuktai init)", version: v("yuktai"), why: "Next.js + Rust starter, docs template, Netlify settings" },
+  { layer: "Rust core", tool: "rust/ → public/wasm/core.wasm", version: "—", why: "The site's own Rust code, built by yuktai build (live check below)" },
+  { layer: "Testing", tool: "Playwright + Chromium, node --test", version: "—", why: "Every route checked for errors, phone and dark mode" },
 ];
 
 const DESIGN = [
@@ -60,6 +63,7 @@ export default function AboutPage() {
         <h2>What it is built with</h2>
         <p className="lead">Sort by layer or tool. Versions come from the site&apos;s package.json at build time.</p>
         <StackTable rows={STACK} />
+        <EngineDemo />
       </section>
 
       <section className="wrap">

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { HomeIcon, MenuIcon, ArrowDownIcon } from "@yuktishaalaa/yuktai/icons";
 import { GUIDES, VERSIONS } from "@/data/site";
-import { GuideIcon } from "../Icon";
+import { GuideIcon } from "@/components/ui/Icon";
 
 export default function GuideNav() {
   const path = usePathname().replace(/\/?$/, "/");

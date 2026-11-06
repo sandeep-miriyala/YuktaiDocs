@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Grid agents · YuktaiDocs",
+  title: "Grid agents",
   description: "YuktAI grid agents: question bar, assistant with Telugu rules, standalone agent, grid tools, WebMCP and multi-step tasks, with Next.js and vanilla code.",
 };
 

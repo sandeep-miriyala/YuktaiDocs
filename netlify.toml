@@ -1,8 +1,9 @@
 # YuktaiDocs on Netlify (free): Next.js static export.
-# `npm run build` writes plain files to out/; Netlify serves them. No server, no functions.
+# `npm run build` (yuktai build) compiles rust/ to WebAssembly, then writes plain files to out/.
+# Netlify serves them. No server, no functions.
 # Old .html addresses redirect to the new routes (public/_redirects).
 [build]
-  command = "npm run build"
+  command = "rustup target add wasm32-unknown-unknown && npm run build"
   publish = "out"
 
 [build.environment]
@@ -35,6 +36,6 @@
     Cache-Control = "no-cache"
 
 [[headers]]
-  for = "/manifest.webmanifest"
+  for = "/manifest.json"
   [headers.values]
     Content-Type = "application/manifest+json"

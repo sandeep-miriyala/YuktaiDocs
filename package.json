@@ -1,28 +1,30 @@
 {
-  "name": "yuktaidocs-next",
+  "name": "yuktaidocs-v2",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "yuktai dev",
+    "build": "yuktai build",
+    "lint": "eslint",
+    "test": "node --test"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.106.1",
     "@tanstack/react-table": "^9.3.1",
     "@yuktishaalaa/ask-page": "1.0.0",
-    "@yuktishaalaa/yuktai": "5.3.12",
+    "@yuktishaalaa/yuktai": "5.3.13",
     "next": "16.4.5",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
-    "typescript": "^5"
+    "typescript": "^5",
+    "yuktai": "^0.1.1"
   }
 }

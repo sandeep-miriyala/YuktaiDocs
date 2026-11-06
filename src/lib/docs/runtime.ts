@@ -37,7 +37,7 @@ function widgetConfig() {
   try { hasPrefs = !!localStorage.getItem("yuktai-a11y-prefs"); } catch {}
   const base: Record<string, any> = {
     position: "left",
-    primaryColor: "#4a1fb8",
+    primaryColor: "#0038B4",
     title: "Accessibility",
     showPageTools: true,
     defaultTab: "ask",

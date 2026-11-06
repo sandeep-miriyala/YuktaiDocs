@@ -2,7 +2,7 @@
 // Change a release here and every page follows.
 
 export const VERSIONS = {
-  yuktai: "5.3.12",
+  yuktai: "5.3.13",
   askPage: "1.0.0",
 } as const;
 
@@ -15,10 +15,11 @@ export const LINKS = {
 
 export type IconKey =
   | "accessibility" | "grid" | "robot" | "chat" | "tools" | "code" | "hub"
-  | "layout" | "wand" | "star" | "dataObject" | "speed";
+  | "layout" | "wand" | "star" | "dataObject" | "speed" | "install";
 
 // The guides (src/app/(guides)/<name>/page.tsx)
 export const GUIDES: { href: string; title: string; text: string; icon: IconKey }[] = [
+  { href: "/create/", title: "Create an app", text: "npx yuktai init my-app: Next.js + Rust, the widget, Ask and a PWA in one command.", icon: "install" },
   { href: "/accessibility/", title: "Accessibility", text: "Floating ♿ button: contrast, text size, dyslexia font, colour-blind filters, reduced motion, speak on focus.", icon: "accessibility" },
   { href: "/grid/", title: "Data grid", text: "Search, sort, pages, selection, CSV, five themes and keyboard navigation, with the engine and time shown.", icon: "grid" },
   { href: "/agents/", title: "Grid agents", text: "Ask the data in plain words, multi-step tasks, custom rules, WebMCP tools for browser agents.", icon: "robot" },
@@ -113,3 +114,13 @@ export const PACKAGES = [
     icon: "chat",
   },
 ] as const;
+
+// The header menu (src/components/yuktai/Header.tsx)
+export const NAV = [
+  { href: "/#guides", label: "Docs" },
+  { href: "/create/", label: "Create an app" },
+  { href: "/#packages", label: "Packages" },
+  { href: "/#why", label: "Why YuktAI" },
+  { href: "/about/", label: "How it's built" },
+  { href: LINKS.github, label: "GitHub" },
+];

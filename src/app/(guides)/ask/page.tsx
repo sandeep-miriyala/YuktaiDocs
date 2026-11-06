@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Ask page (RAG) · YuktaiDocs",
+  title: "Ask page (RAG)",
   description: "YuktAI page and data RAG: the new Ask page panel (Rust search, on-device AI, highlighted sources) and BM25 retrieval on your own text, with code to copy.",
 };
 

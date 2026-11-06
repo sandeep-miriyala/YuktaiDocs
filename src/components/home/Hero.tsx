@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { ChatIcon, ArrowRightIcon, CopyIcon, CheckIcon } from "@yuktishaalaa/yuktai/icons";
 import { QUESTIONS, VERSIONS } from "@/data/site";
-import { ask } from "../ask";
+import { ask } from "@/components/yuktai/ask";
 
 const INSTALL = `npm i @yuktishaalaa/yuktai@${VERSIONS.yuktai}`;
 

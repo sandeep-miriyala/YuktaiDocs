@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Icon studio · YuktaiDocs",
+  title: "Icon studio",
   description: "YuktAI icon studio: every icon at any custom size and colour, outline or filled, with React and HTML code and PNG/SVG downloads.",
 };
 
@@ -25,7 +25,7 @@ export default function IconsPage() {
 <fieldset className={"st-seg"}><legend>{"Style"}</legend><label><input type={"radio"} name={"st-variant"} defaultValue={"outline"} defaultChecked /><span>{"Outline"}</span></label><label><input type={"radio"} name={"st-variant"} defaultValue={"filled"} /><span>{"Filled"}</span></label></fieldset>{" "}
 <fieldset className={"st-seg"} id={"st-shape-field"} hidden><legend>{"Shape"}</legend><label><input type={"radio"} name={"st-shape"} defaultValue={"rounded"} defaultChecked /><span>{"Rounded"}</span></label><label><input type={"radio"} name={"st-shape"} defaultValue={"circle"} /><span>{"Circle"}</span></label></fieldset>{" "}
 <fieldset className={"st-swatches"}><legend>{"Colour"}</legend><label className={"st-sw"} title={"Forest green #084d31"}><input type={"radio"} name={"st-color"} defaultValue={"#084d31"} defaultChecked /><span className={"st-dot"} style={{ background: "#084d31" }}></span><span className={"sr-only"}>{"Forest green"}</span></label><label className={"st-sw"} title={"Deep blue #0a4a85"}><input type={"radio"} name={"st-color"} defaultValue={"#0a4a85"} /><span className={"st-dot"} style={{ background: "#0a4a85" }}></span><span className={"sr-only"}>{"Deep blue"}</span></label><label className={"st-sw"} title={"Ink #0b1220"}><input type={"radio"} name={"st-color"} defaultValue={"#0b1220"} /><span className={"st-dot"} style={{ background: "#0b1220" }}></span><span className={"sr-only"}>{"Ink"}</span></label><label className={"st-sw"} title={"Rust #7a3209"}><input type={"radio"} name={"st-color"} defaultValue={"#7a3209"} /><span className={"st-dot"} style={{ background: "#7a3209" }}></span><span className={"sr-only"}>{"Rust"}</span></label><label className={"st-sw"} title={"Plum #5b2a86"}><input type={"radio"} name={"st-color"} defaultValue={"#5b2a86"} /><span className={"st-dot"} style={{ background: "#5b2a86" }}></span><span className={"sr-only"}>{"Plum"}</span></label>{" "}
-<label className={"st-sw st-custom"} title={"Choose any colour"}><input type={"color"} id={"st-custom"} defaultValue={"#7c3aed"} /><span className={"sr-only"}>{"Custom colour"}</span></label>{" "}
+<label className={"st-sw st-custom"} title={"Choose any colour"}><input type={"color"} id={"st-custom"} defaultValue={"#0038B4"} /><span className={"sr-only"}>{"Custom colour"}</span></label>{" "}
 </fieldset>{" "}
 </div>{" "}
 <fieldset className={"st-sizebox"}>{" "}

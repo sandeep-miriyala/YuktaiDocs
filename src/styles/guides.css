@@ -4,16 +4,16 @@
    Colours: every text pair is at least 7:1 (WCAG 2.2 AAA, 1.4.6) in both themes;
    borders, icons and focus rings are at least 3:1 (1.4.11).
    Tokens are prefixed --d-* so they never clash with YuktAI's own widget CSS. */
-/* 2026 refresh: violet → blue "AI" palette. Text pairs still ≥ 7:1 in both themes. */
+/* Brand blue from the YuktAI logo (navy #000633, blue #0038B4). Text pairs still ≥ 7:1 in both themes. */
 :root {
-  --d-bg:#f7f7fb; --d-panel:#ffffff; --d-panel2:#f1f0f9; --d-chip:#ece9fb;
-  --d-text:#0d0b1f; --d-muted:#3d3a56; --d-link:#1d3fb8; --d-accent:#4a1fb8; --d-rust:#7a3209;
-  --d-btn-bg:#4a1fb8; --d-btn-text:#ffffff; --d-line:#7c78a0; --d-focus:#7a3e00;
+  --d-bg:#f7f7fb; --d-panel:#ffffff; --d-panel2:#eef2fa; --d-chip:#e6eefc;
+  --d-text:#0d0b1f; --d-muted:#3d3a56; --d-link:#1d3fb8; --d-accent:#0038B4; --d-rust:#7a3209;
+  --d-btn-bg:#0038B4; --d-btn-text:#ffffff; --d-line:#7c78a0; --d-focus:#7a3e00;
   --d-code-bg:#f4f3fb;
-  --d-grad:linear-gradient(135deg,#5b21b6 0%,#1e40af 100%);
-  --d-glow1:rgba(124,58,237,.16); --d-glow2:rgba(37,99,235,.14);
+  --d-grad:linear-gradient(135deg,#000633 0%,#0038B4 100%);
+  --d-glow1:rgba(0,83,237,.16); --d-glow2:rgba(37,99,235,.14);
   --d-soft:rgba(13,11,31,.06);
-  --d-shadow:0 18px 50px rgba(40,20,90,.10);
+  --d-shadow:0 18px 50px rgba(0,6,51,.10);
   --d-radius:18px; --d-max:1280px;
   --d-font:"Inter","Segoe UI Variable","Segoe UI",system-ui,-apple-system,"Noto Sans Telugu","Nirmala UI",sans-serif;
   --d-mono:ui-monospace,SFMono-Regular,"Cascadia Code",Consolas,"Liberation Mono",monospace;
@@ -22,11 +22,11 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --d-bg:#08081a; --d-panel:#12122a; --d-panel2:#0e0e22; --d-chip:#1d1b3d;
-    --d-text:#f4f3ff; --d-muted:#cbc8e6; --d-link:#a5b4fc; --d-accent:#c4b5fd; --d-rust:#ffb68a;
-    --d-btn-bg:#c4b5fd; --d-btn-text:#14093a; --d-line:#6a6696; --d-focus:#ffe066;
+    --d-text:#f4f3ff; --d-muted:#cbc8e6; --d-link:#93c5fd; --d-accent:#93c5fd; --d-rust:#ffb68a;
+    --d-btn-bg:#93c5fd; --d-btn-text:#000633; --d-line:#6a6696; --d-focus:#ffe066;
     --d-code-bg:#0c0c20;
-    --d-grad:linear-gradient(135deg,#c4b5fd 0%,#93c5fd 100%);
-    --d-glow1:rgba(139,92,246,.22); --d-glow2:rgba(59,130,246,.18);
+    --d-grad:linear-gradient(135deg,#93c5fd 0%,#67e8f9 100%);
+    --d-glow1:rgba(103,232,249,.22); --d-glow2:rgba(59,130,246,.18);
     --d-soft:rgba(255,255,255,.06);
     --d-shadow:0 24px 70px rgba(0,0,0,.5);
     color-scheme:dark;
@@ -34,11 +34,11 @@
 }
 :root[data-theme="dark"] {
   --d-bg:#08081a; --d-panel:#12122a; --d-panel2:#0e0e22; --d-chip:#1d1b3d;
-  --d-text:#f4f3ff; --d-muted:#cbc8e6; --d-link:#a5b4fc; --d-accent:#c4b5fd; --d-rust:#ffb68a;
-  --d-btn-bg:#c4b5fd; --d-btn-text:#14093a; --d-line:#6a6696; --d-focus:#ffe066;
+  --d-text:#f4f3ff; --d-muted:#cbc8e6; --d-link:#93c5fd; --d-accent:#93c5fd; --d-rust:#ffb68a;
+  --d-btn-bg:#93c5fd; --d-btn-text:#000633; --d-line:#6a6696; --d-focus:#ffe066;
   --d-code-bg:#0c0c20;
-  --d-grad:linear-gradient(135deg,#c4b5fd 0%,#93c5fd 100%);
-  --d-glow1:rgba(139,92,246,.22); --d-glow2:rgba(59,130,246,.18);
+  --d-grad:linear-gradient(135deg,#93c5fd 0%,#67e8f9 100%);
+  --d-glow1:rgba(103,232,249,.22); --d-glow2:rgba(59,130,246,.18);
   --d-soft:rgba(255,255,255,.06);
   --d-shadow:0 24px 70px rgba(0,0,0,.5);
   color-scheme:dark;
@@ -340,4 +340,4 @@ h1{letter-spacing:-.045em}
 @media (max-width:860px){.trust{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* answer preview: a typed question and a streamed answer, decorative */
 @media (prefers-reduced-motion:reduce){.card:hover,.chip:hover,.btn.primary:hover{transform:none}.ai-preview .caret{display:none}}
-@media (forced-colors:active){.hero-ask,.demo{border:2px solid CanvasText}.iconbox,.brandmark{border:1px solid CanvasText}}
+@media (forced-colors:active){.hero-ask,.demo{border:2px solid CanvasText}.iconbox,.logo{border:1px solid CanvasText}}

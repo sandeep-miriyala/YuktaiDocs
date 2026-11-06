@@ -3,7 +3,7 @@ import { CheckIcon, ArrowRightIcon } from "@yuktishaalaa/yuktai/icons";
 import {
   COMPARE, GUIDES, LINKS, PACKAGES, STACKS, STATS, STEPS, TESTS, TEST_TOTAL, VERSIONS, WEB_SHARE,
 } from "@/data/site";
-import { GuideIcon } from "../Icon";
+import { GuideIcon } from "@/components/ui/Icon";
 
 function Kicker({ children }: { children: string }) {
   return <p className="kicker">{children}</p>;

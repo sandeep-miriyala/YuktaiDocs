@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "PHP (Composer) · YuktaiDocs",
+  title: "PHP (Composer)",
   description: "composer require yuktishaalaa/yuktai: add the YuktAI accessibility widget, page tools and data grid to plain PHP, Laravel and WordPress pages in one line.",
 };
 

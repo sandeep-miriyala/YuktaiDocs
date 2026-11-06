@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Data grid · YuktaiDocs",
+  title: "Data grid",
   description: "YuktAI data grid playground: choose engine, view, theme, Telugu UI and features, and copy the matching Next.js or vanilla code.",
 };
 

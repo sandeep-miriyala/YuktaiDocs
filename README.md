@@ -3,27 +3,30 @@
 Docs and live demos for [YuktAI](https://www.npmjs.com/package/@yuktishaalaa/yuktai) and
 [Ask page](https://www.npmjs.com/package/@yuktishaalaa/ask-page), at https://yuktaidocs.netlify.app
 
-- **Next.js** (App Router, static export): `npm run build` writes plain files to `out/`.
-- **Netlify** (free) runs the build and serves `out/`. No server, no functions. See `netlify.toml`.
-- YuktAI and Ask page come from npm and are bundled into the site.
+Made with `npx yuktai init yuktaidocs --stack next-rust --template docs --features page-tools --host netlify`.
+
+- **Next.js** (static export) + **Rust → WebAssembly** (`rust/`), built by `yuktai build`
+- **Netlify** (free) builds it and serves `out/`. No server, no functions. See `netlify.toml`.
+- YuktAI, Ask page and TanStack come from npm and are bundled into the site.
 
 ```
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # writes out/
+npm run build    # Rust → WASM, then static files in out/
+npm test         # checks the built site
 ```
-
-## Where things are
 
 | Path | What |
 |---|---|
-| `src/data/site.ts` | Versions, numbers, links. Change a release here. |
+| `yuktai.config.ts` | Name, colours, features |
+| `src/data/site.ts` | Versions, numbers, menu, guides. Change a release here. |
 | `src/app/page.tsx` | Home page |
-| `src/app/about/page.tsx` | How this site is built: stack (TanStack Table), live npm data (TanStack Query) |
-| `src/app/(guides)/<name>/page.tsx` | The 12 guides (`/grid/`, `/jquery/`, …) |
+| `src/app/(guides)/<name>/page.tsx` | The 13 guides (`/create/`, `/grid/`, …) |
+| `src/app/about/page.tsx` | How this site is built (TanStack Table + Query) |
+| `src/components/yuktai/` | Header, widget, Ask, install, theme |
 | `src/lib/docs/pages/<name>.ts` | The live demo on each guide |
-| `src/lib/docs/runtime.ts` | Shared demo helpers; loads YuktAI from npm (Rust engines built in) |
-| `src/app/manifest.ts`, `public/sw.js`, `src/components/InstallButton.tsx` | Installable app (PWA), works offline |
+| `rust/src/lib.rs` | The site's Rust core (word count, live check on About) |
+| `src/styles/` | `tokens.css` (colours), `globals.css`, `guides.css` |
 | `public/_redirects` | Old `.html` addresses → the new routes |
 
 Icons everywhere come from `@yuktishaalaa/yuktai/icons`.

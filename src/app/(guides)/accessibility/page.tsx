@@ -5,7 +5,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Accessibility widget · YuktaiDocs",
+  title: "Accessibility widget",
   description: "YuktAI accessibility widget: live settings, a builder for YUKTAI_CONFIG and YuktAIWrapper, and the full reference.",
 };
 

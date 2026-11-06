@@ -5,7 +5,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Python (pip) · YuktaiDocs",
+  title: "Python (pip)",
   description: "pip install yuktai: add the YuktAI accessibility widget, page tools and data grid to Django, Flask and FastAPI pages in one line.",
 };
 

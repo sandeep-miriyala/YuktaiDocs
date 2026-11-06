@@ -6,7 +6,7 @@
 //     release once and needed a refresh.)
 //   • the YuktAI script (jsDelivr or unpkg, a fixed version): cache first
 // Bump CACHE whenever you publish a change, so visitors get the new files.
-const CACHE = "yuktaidocs-v17"
+const CACHE = "yuktaidocs-v21"
 const CORE = [
   "/",
   "/accessibility/",
@@ -22,9 +22,11 @@ const CORE = [
   "/playground/",
   "/rust/",
   "/about/",
-  "/manifest.webmanifest",
+  "/create/",
+  "/manifest.json",
   "/icons/favicon.svg",
   "/icons/icon-192.png",
+  "/icons/favicon-32.png",
   "/icons/icon-512.png",
   "/icons/maskable-512.png",
   "/icons/apple-touch-icon.png"

@@ -1,43 +1,5 @@
-/* YuktaiDocs (Next.js). Same colour tokens as the guide pages, so both feel like one site.
-   Text pairs are at least 7:1 in both themes; borders and icons at least 3:1. */
-:root {
-  --bg: #f7f7fb; --panel: #ffffff; --panel2: #f1f0f9; --chip: #ece9fb;
-  --text: #0d0b1f; --muted: #3d3a56; --link: #1d3fb8; --accent: #4a1fb8;
-  --line: #7c78a0; --line-soft: #d9d6ea; --focus: #7a3e00;
-  --btn-text: #ffffff; --code-bg: #0d0b1f; --code-text: #e9e6ff;
-  --grad: linear-gradient(135deg, #5b21b6 0%, #1e40af 100%);
-  --glow1: rgba(124, 58, 237, .16); --glow2: rgba(37, 99, 235, .14);
-  --shadow: 0 24px 60px rgba(40, 20, 90, .12);
-  --c1: #4a1fb8; --c2: #c2410c; --c3: #0e7490; --c4: #1e293b;
-  --radius: 18px; --max: 1200px;
-  --font: "Inter", "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, "Noto Sans Telugu", "Nirmala UI", sans-serif;
-  --mono: ui-monospace, "Cascadia Code", SFMono-Regular, Consolas, "Liberation Mono", monospace;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #08081a; --panel: #12122a; --panel2: #0e0e22; --chip: #1d1b3d;
-    --text: #f4f3ff; --muted: #cbc8e6; --link: #a5b4fc; --accent: #c4b5fd;
-    --line: #6a6696; --line-soft: #2b2950; --focus: #ffe066;
-    --btn-text: #14093a; --code-bg: #05050f; --code-text: #e9e6ff;
-    --grad: linear-gradient(135deg, #c4b5fd 0%, #93c5fd 100%);
-    --glow1: rgba(139, 92, 246, .22); --glow2: rgba(59, 130, 246, .18);
-    --shadow: 0 24px 70px rgba(0, 0, 0, .5);
-    --c1: #c4b5fd; --c2: #fdba74; --c3: #67e8f9; --c4: #e2e8f0;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #08081a; --panel: #12122a; --panel2: #0e0e22; --chip: #1d1b3d;
-  --text: #f4f3ff; --muted: #cbc8e6; --link: #a5b4fc; --accent: #c4b5fd;
-  --line: #6a6696; --line-soft: #2b2950; --focus: #ffe066;
-  --btn-text: #14093a; --code-bg: #05050f; --code-text: #e9e6ff;
-  --grad: linear-gradient(135deg, #c4b5fd 0%, #93c5fd 100%);
-  --glow1: rgba(139, 92, 246, .22); --glow2: rgba(59, 130, 246, .18);
-  --shadow: 0 24px 70px rgba(0, 0, 0, .5);
-  --c1: #c4b5fd; --c2: #fdba74; --c3: #67e8f9; --c4: #e2e8f0;
-  color-scheme: dark;
-}
+/* YuktaiDocs page styles. Colours come from tokens.css. */
+@import "./tokens.css";
 
 *, *::before, *::after { box-sizing: border-box; }
 html { background: var(--bg); scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
@@ -69,7 +31,7 @@ section.wrap, .band { padding-block: 64px; }
 .topbar { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--line-soft); background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); }
 .topbar-in { max-width: var(--max); margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; min-height: 68px; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 1.1rem; letter-spacing: -.02em; }
-.brandmark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: var(--grad); color: var(--btn-text); font-weight: 800; box-shadow: 0 6px 18px var(--glow1); }
+.logo { display: block; flex: none; border-radius: 11px; box-shadow: 0 0 0 1px color-mix(in srgb, #0053ED 45%, transparent); }
 .ver-chip { padding: 3px 10px; border-radius: 999px; background: var(--chip); color: var(--accent); font-weight: 700; font-size: .78rem; white-space: nowrap; }
 .topnav { display: flex; gap: 2px; }
 .topnav a { white-space: nowrap; padding: 10px 12px; border-radius: 10px; color: var(--muted); font-weight: 600; font-size: .95rem; text-decoration: none; }
@@ -230,7 +192,7 @@ section.wrap, .band { padding-block: 64px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .stack:hover, .guide:hover, .chip:hover, .btn.primary:hover { transform: none; }
 }
-@media (forced-colors: active) { .hero-ask { border: 2px solid CanvasText; } .iconbox, .brandmark, .badge { border: 1px solid CanvasText; } }
+@media (forced-colors: active) { .hero-ask { border: 2px solid CanvasText; } .iconbox, .logo, .badge { border: 1px solid CanvasText; } }
 
 /* ── Guide pages: sidebar + content ── */
 .guide-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 40px; max-width: var(--max); margin: 0 auto; padding: 28px max(20px, env(safe-area-inset-right)) 48px max(20px, env(safe-area-inset-left)); }
@@ -278,3 +240,8 @@ section.wrap, .band { padding-block: 64px; }
 .live-row span { color: var(--muted); }
 .live-row strong { color: var(--text); font-variant-numeric: tabular-nums; }
 .design-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; }
+
+/* code blocks written straight into a page (Create an app guide): scroll inside, never the page */
+.guide-body > pre { max-width: 100%; overflow-x: auto; margin: 0 0 18px; padding: 16px 18px; border-radius: 14px; background: var(--code-bg); color: var(--code-text); font-size: .88rem; line-height: 1.6; }
+.guide-body > pre code { background: none; padding: 0; color: inherit; white-space: pre; }
+.guide-body code { overflow-wrap: anywhere; }

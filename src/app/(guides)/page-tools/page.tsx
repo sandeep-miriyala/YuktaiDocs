@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Page tools · YuktaiDocs",
+  title: "Page tools",
   description: "YuktAI page tools: QA audit, form review, design review, Accessibility Copilot, voice commands and the six-tab panel, with Next.js and vanilla code.",
 };
 

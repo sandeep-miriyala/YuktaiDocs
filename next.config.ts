@@ -1,12 +1,14 @@
 import type { NextConfig } from "next";
 
-// Static export: `next build` writes plain files to out/, which Netlify serves
-// for free. No server, no functions.
+// Static export: `yuktai build` writes plain files to out/. Free hosting, no server.
+// NEXT_PUBLIC_BASE_PATH is set for GitHub Pages (the site lives under /<repo>/).
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const nextConfig: NextConfig = {
   output: "export",
-  // /grid/ is written as out/grid/index.html: no .html in any address
   trailingSlash: true,
   images: { unoptimized: true },
+  basePath,
 };
 
 export default nextConfig;

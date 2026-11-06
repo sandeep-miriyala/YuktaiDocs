@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Rust engines · YuktaiDocs",
+  title: "Rust engines",
   description: "YuktAI Rust/WebAssembly engines for grid search and page RAG: benchmark against TypeScript on your own data size.",
 };
 

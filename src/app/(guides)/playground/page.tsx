@@ -4,7 +4,7 @@ import { YuktaiIcon } from "@yuktishaalaa/yuktai/icons";
 import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
-  title: "Function playground · YuktaiDocs",
+  title: "Function playground",
   description: "Run YuktAI core functions (grid queries, BI, tasks, anomalies, voice, contrast, RAG) on your own input and copy the call.",
 };
 
