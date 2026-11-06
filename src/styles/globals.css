@@ -108,6 +108,8 @@ section.wrap, .band { padding-block: 64px; }
 .pkg-name { display: block; font: 700 1.1rem var(--mono); overflow-wrap: anywhere; }
 .pkg-ver { display: inline-block; margin-top: 2px; padding: 1px 9px; border-radius: 999px; background: var(--chip); color: var(--accent); font-size: .8rem; font-weight: 700; }
 .pkg-install { display: block; padding: 10px 14px; border-radius: 10px; background: var(--code-bg); color: var(--code-text); font-size: .88rem; overflow-x: auto; white-space: nowrap; }
+.pkg-cli { grid-column: 1 / -1; }
+.pkg-steps { margin: 0; padding: 12px 16px; border-radius: 12px; background: var(--code-bg); color: var(--code-text); font-size: .9rem; overflow-x: auto; }
 .pkg .pkg-site { color: var(--text); font-size: .95rem; }
 .pkg-links { display: flex; gap: 18px; margin-top: auto !important; }
 .pkg-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; }

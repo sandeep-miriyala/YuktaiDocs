@@ -164,24 +164,31 @@ export function Packages() {
   return (
     <section id="packages" className="wrap">
       <Kicker>npm packages</Kicker>
-      <h2>Two packages, both free on npm</h2>
-      <p className="lead">This site is built with both of them. Install one or both.</p>
+      <h2>Three packages, all free on npm</h2>
+      <p className="lead">Start a new app with the <code>yuktai</code> command, or add the two libraries to a site you already have.</p>
       <ul className="pkg-grid">
         {PACKAGES.map((p) => (
-          <li key={p.name} className="pkg">
+          <li key={p.name} className={p.cli ? "pkg pkg-cli" : "pkg"}>
             <div className="pkg-head">
               <span className="iconbox"><GuideIcon name={p.icon} /></span>
               <div>
                 <strong className="pkg-name">{p.name}</strong>
-                <span className="pkg-ver">v{p.version} · GPL-3.0</span>
+                <span className="pkg-ver">v{p.version} · GPL-3.0{p.cli ? " · command line" : ""}</span>
               </div>
             </div>
             <p>{p.text}</p>
-            <code className="pkg-install">{p.install}</code>
+            {p.cli ? (
+              <pre className="pkg-steps"><code>{`${p.install}
+cd my-app
+npm run dev        # http://localhost:3000`}</code></pre>
+            ) : (
+              <code className="pkg-install">{p.install}</code>
+            )}
             <p className="pkg-site"><strong>On this site:</strong> {p.onThisSite}</p>
             <p className="pkg-links">
               <a href={p.npm}>npm <ArrowRightIcon size={16} aria-hidden="true" /></a>
-              <a href={p.cdn}>jsDelivr <ArrowRightIcon size={16} aria-hidden="true" /></a>
+              {p.guide && <Link href={p.guide}>How to create an app <ArrowRightIcon size={16} aria-hidden="true" /></Link>}
+              {p.cdn && <a href={p.cdn}>jsDelivr <ArrowRightIcon size={16} aria-hidden="true" /></a>}
             </p>
           </li>
         ))}

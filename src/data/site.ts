@@ -4,12 +4,14 @@
 export const VERSIONS = {
   yuktai: "5.3.13",
   askPage: "1.0.0",
+  cli: "0.1.1",
 } as const;
 
 export const LINKS = {
   github: "https://github.com/sandeep-miriyala/yuktai",
   npmYuktai: "https://www.npmjs.com/package/@yuktishaalaa/yuktai",
   npmAsk: "https://www.npmjs.com/package/@yuktishaalaa/ask-page",
+  npmCli: "https://www.npmjs.com/package/yuktai",
   w3techs: "https://w3techs.com/technologies/overview/javascript_library",
 } as const;
 
@@ -19,7 +21,7 @@ export type IconKey =
 
 // The guides (src/app/(guides)/<name>/page.tsx)
 export const GUIDES: { href: string; title: string; text: string; icon: IconKey }[] = [
-  { href: "/create/", title: "Create an app", text: "npx yuktai init my-app: Next.js + Rust, the widget, Ask and a PWA in one command.", icon: "install" },
+  { href: "/create/", title: "Create an app", text: "npx yuktai@latest init my-app --yes: Next.js + Rust, a 10 lakh row grid, QA report, icons, lifecycle, Ask and a PWA in one command.", icon: "install" },
   { href: "/accessibility/", title: "Accessibility", text: "Floating ♿ button: contrast, text size, dyslexia font, colour-blind filters, reduced motion, speak on focus.", icon: "accessibility" },
   { href: "/grid/", title: "Data grid", text: "Search, sort, pages, selection, CSV, five themes and keyboard navigation, with the engine and time shown.", icon: "grid" },
   { href: "/agents/", title: "Grid agents", text: "Ask the data in plain words, multi-step tasks, custom rules, WebMCP tools for browser agents.", icon: "robot" },
@@ -91,8 +93,22 @@ export const QUESTIONS = [
   { label: "Why Rust?", ask: "Why does YuktAI use Rust?" },
 ];
 
-// The two npm packages this site is built with (both in package.json)
-export const PACKAGES = [
+// The npm packages: the CLI that made this site, and the two libraries it runs on (all in package.json)
+export const PACKAGES: readonly {
+  name: string; version: string; text: string; install: string; npm: string; onThisSite: string; icon: IconKey;
+  cdn?: string; guide?: string; cli?: boolean;
+}[] = [
+  {
+    name: "yuktai",
+    version: VERSIONS.cli,
+    text: "Create a YuktAI app in one command: Next.js + Rust, a 10 lakh row data grid, QA report, icons guide, lifecycle hooks, Ask this page, the ♿ widget and an installable PWA. Hosting is free (Netlify or GitHub Pages).",
+    install: "npx yuktai@latest init my-app --yes",
+    npm: LINKS.npmCli,
+    guide: "/create/",
+    onThisSite: "this site was created with it",
+    icon: "install",
+    cli: true,
+  },
   {
     name: "@yuktishaalaa/yuktai",
     version: VERSIONS.yuktai,
@@ -113,7 +129,7 @@ export const PACKAGES = [
     onThisSite: "\"Ask these docs\", the hero box and Ctrl + K",
     icon: "chat",
   },
-] as const;
+];
 
 // The header menu (src/components/yuktai/Header.tsx)
 export const NAV = [

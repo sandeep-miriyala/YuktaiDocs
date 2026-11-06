@@ -4,7 +4,7 @@ import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
   title: "Create an app",
-  description: "npx yuktai init my-app --yes: a Next.js + Rust app with a 10 lakh row grid, QA report, icons guide, lifecycle hooks, Ask this page and an installable PWA, in one command.",
+  description: "npx yuktai@latest init my-app --yes: a Next.js + Rust app with a 10 lakh row grid, QA report, icons guide, lifecycle hooks, Ask this page and an installable PWA, in one command.",
 };
 
 const OPTIONS: [string, string, string][] = [
@@ -51,7 +51,7 @@ export default function CreatePage() {
       </div>
 
       <h2 id="start">1. Create</h2>
-      <pre><code>{`npx yuktai init my-app --yes
+      <pre><code>{`npx yuktai@latest init my-app --yes
 cd my-app
 npm run dev        # http://localhost:3000`}</code></pre>
       <p>
@@ -91,7 +91,7 @@ npm run dev        # http://localhost:3000`}</code></pre>
             ))}
           </tbody>
       </table>
-      <pre><code>{`npx yuktai init shop --template starter --features grid --host github-pages --accent teal`}</code></pre>
+      <pre><code>{`npx yuktai@latest init shop --template starter --features grid --host github-pages --accent teal`}</code></pre>
 
       <h2 id="structure">3. What you get</h2>
       <pre><code>{TREE}</code></pre>

@@ -68,7 +68,7 @@ export default function AboutPage() {
 
       <section className="wrap">
         <p className="kicker">Live from npm</p>
-        <h2>The two packages right now</h2>
+        <h2>The three packages right now</h2>
         <p className="lead">Your browser asks npm for the latest release, so you can see if this site is up to date.</p>
         <LiveNpm />
       </section>
