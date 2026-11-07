@@ -17,7 +17,7 @@ const SPLASH_TIPS = [
   "Ask this page: answers come with their source, and nothing is sent anywhere.",
   "WCAG 2.2 accessibility fixes on every page, with one script tag.",
   "Menus in English, తెలుగు, हिन्दी, தமிழ், ಕನ್ನಡ, മലയാളം and বাংলা.",
-  "Free and open source. No server, no API key.",
+  "Free and open source (GPL-3.0). Python API and LangGraph agents with one command.",
 ];
 import "@/styles/globals.css";
 

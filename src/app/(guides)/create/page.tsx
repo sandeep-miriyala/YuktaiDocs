@@ -4,13 +4,13 @@ import GuideDemo from "@/components/guides/GuideDemo";
 
 export const metadata: Metadata = {
   title: "Create an app",
-  description: "npx yuktai@latest init my-app --yes: a Next.js + Rust app with a 10 lakh row grid, QA report, icons guide, lifecycle hooks, Ask this page and an installable PWA, in one command.",
+  description: "npx yuktai@latest init my-app --yes: a Next.js + Rust + Python app with a 25 lakh row grid, LangGraph agents, RAG, QA report, icons guide, Ask this page and an installable PWA, in one command.",
 };
 
 const OPTIONS: [string, string, string][] = [
   ["--stack", "next-rust, next", "next-rust"],
   ["--template", "docs, starter", "docs"],
-  ["--features", "grid, page-tools, icons (comma-separated), or none", "all"],
+  ["--features", "grid, page-tools, icons, backend (comma-separated), or none", "all"],
   ["--host", "none, netlify, github-pages", "none (no hosting files)"],
   ["--accent", "blue, violet, teal, orange", "blue"],
   ["--title", "any text", "from the folder name"],
@@ -21,20 +21,25 @@ const OPTIONS: [string, string, string][] = [
 const TREE = `my-app/
 ├── yuktai.config.ts        settings: name, colours, features
 ├── rust/                   Rust core → WebAssembly
+├── backend/                Python API (FastAPI): app/main.py, app/agents/, app/routes/,
+│                           knowledge/ (RAG documents), db/ (PostgreSQL), tests/ (pytest)
 ├── src/
 │   ├── app/
 │   │   ├── (guides)/       getting started, configuration, lifecycle, deploy
-│   │   ├── grid/           10 lakh rows data grid
+│   │   ├── grid/           25 lakh rows data grid
+│   │   ├── agents/         Grid Agent and RAG
+│   │   ├── backend/        Python API status and orders
 │   │   ├── qa/             QA report
 │   │   ├── icons/          icons guide
 │   │   └── about/
-│   ├── components/yuktai/  header, logo, widget, Ask, install, theme, colour and font picker, lifecycle
+│   ├── components/yuktai/  header, menu (with submenus), logo, widget, Ask, install, theme, picker, lifecycle
 │   ├── components/ui/      your components
 │   ├── lib/core.ts         calls the Rust core, TypeScript fallback
 │   ├── data/               menu and links, orders.ts (sample rows)
 │   └── styles/             tokens.css, globals.css, look.css, grid.css, qa.css, icons.css
 ├── public/                 manifest, service worker, icons, screenshots, favicon.ico
-├── tests/                  checks for the built site
+├── tests/                  checks for the built site, e2e/ (Playwright)
+├── playwright.config.ts
 └── README.md               written for the choices you made
     (+ netlify.toml or .github/workflows/deploy.yml only with --host)`;
 
@@ -45,15 +50,16 @@ export default function CreatePage() {
         <p className="kicker">Create an app</p>
         <h1>One command, a ready app</h1>
         <p className="lead">
-          <code>npx yuktai init</code> makes a Next.js + Rust app with the YuktAI accessibility widget, Ask this page
-          (Ctrl + K), 163 icons and an installable PWA. It builds to plain files, so hosting is free. This site was made with it.
+          <code>npx yuktai init</code> makes a Next.js + Rust app with a Python API, LangGraph agents, the YuktAI accessibility
+          widget, Ask this page (Ctrl + K), 163 icons and an installable PWA. One <code>npm run dev</code> starts all of it. This
+          site was made with it.
         </p>
       </div>
 
       <h2 id="start">1. Create</h2>
       <pre><code>{`npx yuktai@latest init my-app --yes
 cd my-app
-npm run dev        # http://localhost:3000`}</code></pre>
+npm run dev        # site http://localhost:3000 · Python API http://localhost:8000/docs`}</code></pre>
       <p>
         <code>--yes</code> skips the questions and turns everything on. Without it you choose the stack, template, features, hosting
         and colour; Enter keeps the recommended choice.
@@ -62,8 +68,9 @@ npm run dev        # http://localhost:3000`}</code></pre>
         <caption className="sr-only">Pages you get with --yes</caption>
         <thead><tr><th scope="col">Page</th><th scope="col">What it does</th></tr></thead>
         <tbody>
-          <tr><td>/grid/</td><td>10 lakh (1,000,000) sample orders made in the browser. Six columns, five data types: text, badge, number, date, yes/no. Search and sort every column in Rust, well under a second.</td></tr>
+          <tr><td>/grid/</td><td>25 lakh (2,500,000) sample orders made in the browser in about a second (10 lakh on phones). Six columns, five data types: text, badge, number, date, yes/no. Search 0.3 s and sort 0.5 s on 25 lakh rows, measured in desktop Chrome.</td></tr>
           <tr><td>Grid AI Assistant</td><td>Type or say <code>unpaid</code>, <code>search Pune</code>, <code>sort by date</code>. 🎤 voice and 24 input languages (English and the 22 Indian languages), your own phrases as rules, 11 WebMCP tools for browser agents.</td></tr>
+          <tr><td>Agentic AI ▾</td><td>A main menu with a submenu: Grid Agent, Ask the documents (RAG), Testing Agent, YuktAI Assistant, Python API. See <a href="#agents">Agents</a>.</td></tr>
           <tr><td>/qa/</td><td>15 WCAG 2.2 checks, a score, what to fix and a Markdown report. A practice area with mistakes to try it on.</td></tr>
           <tr><td>/icons/</td><td>Every YuktAI icon: search, size, outline or filled, colour with a contrast check, copy the code.</td></tr>
           <tr><td>/lifecycle/</td><td>The three moments of every part: <code>onStart</code>, <code>onChange</code>, <code>onEnd</code>.</td></tr>
@@ -103,9 +110,15 @@ npm run dev        # http://localhost:3000`}</code></pre>
           <caption className="sr-only">Commands</caption>
           <thead><tr><th scope="col">Command</th><th scope="col">What it does</th></tr></thead>
           <tbody>
-            <tr><td>npm run dev</td><td>Rust → WebAssembly (when <code>rust/</code> exists), then the Next.js dev server</td></tr>
+            <tr><td>npm run dev</td><td>All together: Rust → WebAssembly, the Python API (port 8000, or the next free one) and the Next.js dev server. One Ctrl + C stops all</td></tr>
+            <tr><td>npm run dev -- --no-api</td><td>The site without the Python API</td></tr>
             <tr><td>npm run build</td><td>Rust → WebAssembly, then static files in <code>out/</code></td></tr>
             <tr><td>npm test</td><td>Checks the built site: every page, manifest, language, title, skip link</td></tr>
+            <tr><td>npm run dev:api</td><td>The Python API on its own: http://localhost:8000/docs</td></tr>
+            <tr><td>npm run test:api</td><td>The Python API&apos;s tests (pytest), no key or database needed</td></tr>
+            <tr><td>npm run test:e2e</td><td>Playwright on a desktop and a phone screen (once: <code>npx playwright install chromium</code>)</td></tr>
+            <tr><td>npm run agent:test</td><td>Testing Agent: runs lint, the site test, pytest and Playwright, then explains what failed</td></tr>
+            <tr><td>npm run assistant</td><td>YuktAI Assistant: <code>add page contact</code>, <code>add api products</code>, how-to questions</td></tr>
           </tbody>
       </table>
 
@@ -117,11 +130,42 @@ npm run dev        # http://localhost:3000`}</code></pre>
       </p>
       <pre><code>{`rustup target add wasm32-unknown-unknown`}</code></pre>
 
-      <h2 id="deploy">6. Put it online</h2>
+      <h2 id="python-api">6. Python API</h2>
+      <p>
+        <code>backend/</code> is a FastAPI app that starts with <code>npm run dev</code>. The first run makes <code>backend/.venv</code> and
+        installs the requirements (Python 3.10 or newer). Without Python the site still runs. Endpoints: <code>/api/health</code>,
+        <code>/api/orders</code> (25 lakh sample orders, page by page, no database), <code>/api/agents/grid</code>, <code>/api/rag/ask</code>,
+        <code>/api/db/health</code>. Every file in <code>backend/app/routes/</code> with a <code>router</code> loads by itself.
+      </p>
+      <pre><code>{`# backend/.env  (copy backend/.env.example; never committed)
+GROQ_API_KEY=            # optional: agents and RAG use Groq when set
+DATABASE_URL=            # optional: PostgreSQL, see backend/db/README.md
+YUKTAI_ENV=development   # production turns off the developer agents`}</code></pre>
+
+      <h2 id="agents">7. Agents (LangGraph)</h2>
+      <table className="ref">
+        <caption className="sr-only">The four agents</caption>
+        <thead><tr><th scope="col">Agent</th><th scope="col">Where</th><th scope="col">What it does</th></tr></thead>
+        <tbody>
+          <tr id="grid-agent"><td>🤖 Grid Agent</td><td>/agents/</td><td>Questions about the orders with tools: count, total, average, top, by city. Read-only.</td></tr>
+          <tr id="rag"><td>📚 Ask the documents</td><td>/agents/</td><td>RAG over <code>backend/knowledge/*.md</code>, answers with the passages used. Indian scripts are searched as whole words.</td></tr>
+          <tr id="testing-agent"><td>🧪 Testing Agent</td><td>npm run agent:test</td><td>Runs allowlisted checks only, explains failures. Developer tool.</td></tr>
+          <tr id="assistant"><td>✨ YuktAI Assistant</td><td>npm run assistant</td><td>Adds pages and API endpoints after you say yes; never overwrites a file. Developer tool.</td></tr>
+        </tbody>
+      </table>
+      <p>
+        With <code>GROQ_API_KEY</code> they use a language model through LangGraph tool calling; the key stays on the server and the
+        question with the chosen passages or tool results goes to Groq. Without a key they work in free mode and nothing leaves your
+        computer. Build your own: <code>build_agent(tools, instructions, model)</code> in <code>backend/app/agents/base.py</code>.
+      </p>
+
+      <h2 id="deploy">8. Put it online</h2>
       <p>
         <code>npm run build</code> makes a static site in <code>out/</code>; any static host can serve it. Hosting files are added only when
         you ask: <code>--host netlify</code> writes <code>netlify.toml</code>, <code>--host github-pages</code> writes a GitHub Action
-        (then Settings → Pages → Source: GitHub Actions). See also <Link href="/nextjs/">Next.js setup</Link>.
+        (then Settings → Pages → Source: GitHub Actions). The Python API needs a host that runs Python (Render, Railway, Fly.io or
+        your own server); set <code>NEXT_PUBLIC_API_URL</code> to its address when you build the site. See also
+        {" "}<Link href="/nextjs/">Next.js setup</Link>.
       </p>
       <GuideDemo page="create" />
     </>

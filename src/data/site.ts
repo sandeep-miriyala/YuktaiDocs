@@ -2,9 +2,9 @@
 // Change a release here and every page follows.
 
 export const VERSIONS = {
-  yuktai: "5.5.1",
+  yuktai: "5.5.3",
   askPage: "1.0.0",
-  cli: "1.1.0",
+  cli: "1.3.0",
 } as const;
 
 export const LINKS = {
@@ -21,7 +21,7 @@ export type IconKey =
 
 // The guides (src/app/(guides)/<name>/page.tsx)
 export const GUIDES: { href: string; title: string; text: string; icon: IconKey }[] = [
-  { href: "/create/", title: "Create an app", text: "npx yuktai@latest init my-app --yes: Next.js + Rust, a 10 lakh row grid, QA report, icons, lifecycle, Ask and a PWA in one command.", icon: "install" },
+  { href: "/create/", title: "Create an app", text: "npx yuktai@latest init my-app --yes: Next.js + Rust + Python, a 25 lakh row grid, LangGraph agents, RAG, QA report, icons and a PWA in one command.", icon: "install" },
   { href: "/accessibility/", title: "Accessibility", text: "Floating ♿ button: contrast, text size, dyslexia font, colour-blind filters, reduced motion, speak on focus.", icon: "accessibility" },
   { href: "/grid/", title: "Data grid", text: "Search, sort, pages, selection, CSV, five themes and keyboard navigation, with the engine and time shown.", icon: "grid" },
   { href: "/agents/", title: "Grid agents", text: "Ask the data in plain words, multi-step tasks, custom rules, WebMCP tools for browser agents.", icon: "robot" },
@@ -101,7 +101,7 @@ export const PACKAGES: readonly {
   {
     name: "yuktai",
     version: VERSIONS.cli,
-    text: "Create a YuktAI app in one command: Next.js + Rust, a 10 lakh row grid with the Grid AI Assistant (🎤 voice, 24 languages, WebMCP), QA report, icons guide, 🎨 colour and font picker, lifecycle hooks, Ask this page and a complete PWA. Host it anywhere for free.",
+    text: "Create a YuktAI app in one command: Next.js + Rust + a Python API, a 25 lakh row grid with the Grid AI Assistant (🎤 voice, 24 languages, WebMCP), LangGraph agents (Grid Agent, RAG, Testing Agent, YuktAI Assistant), PostgreSQL basics, Playwright tests, QA report, icons guide and a complete PWA.",
     install: "npx yuktai@latest init my-app --yes",
     npm: LINKS.npmCli,
     guide: "/create/",
@@ -131,12 +131,55 @@ export const PACKAGES: readonly {
   },
 ];
 
-// The header menu (src/components/yuktai/Header.tsx)
-export const NAV = [
-  { href: "/#guides", label: "Docs", key: "docs" },
-  { href: "/create/", label: "Create an app", key: "createApp" },
-  { href: "/#packages", label: "Packages", key: "packages" },
-  { href: "/#why", label: "Why YuktAI", key: "whyYuktai" },
-  { href: "/about/", label: "How it's built", key: "howBuilt" },
-  { href: LINKS.github, label: "GitHub", key: "github" },
+// The header menu (src/components/yuktai/Header.tsx). A group with `children` is a ▾ submenu.
+export type NavLink = { href: string; label: string; key?: string; hint?: string };
+export type NavGroup = { label: string; key: string; children: NavLink[] };
+export type NavItem = NavLink | NavGroup;
+export const isGroup = (n: NavItem): n is NavGroup => "children" in n;
+
+export const NAV: NavItem[] = [
+  {
+    label: "Get started",
+    key: "getStarted",
+    children: [
+      { href: "/create/", label: "Create an app", key: "createApp", hint: "npx yuktai@latest init my-app --yes" },
+      { href: "/nextjs/", label: "Next.js setup", hint: "YuktAIWrapper for the App Router" },
+      { href: "/#start", label: "JavaScript / HTML", hint: "Two script tags on any site" },
+      { href: "/jquery/", label: "jQuery", hint: "jQuery 1.12 to 4.0" },
+      { href: "/python/", label: "Python (pip)", hint: "Django, Flask, FastAPI" },
+      { href: "/php/", label: "PHP (Composer)", hint: "Plain PHP, Laravel, WordPress" },
+    ],
+  },
+  {
+    label: "Components",
+    key: "components",
+    children: [
+      { href: "/accessibility/", label: "Accessibility", hint: "The ♿ widget: contrast, text size, fonts" },
+      { href: "/grid/", label: "Data grid", hint: "25 lakh rows, search and sort in Rust" },
+      { href: "/page-tools/", label: "Page tools", hint: "Copilot, QA report, form and design review" },
+      { href: "/icons/", label: "Icon studio", hint: "Every icon, any size and colour" },
+      { href: "/playground/", label: "Function playground", hint: "Run the core functions" },
+      { href: "/rust/", label: "Rust engines", hint: "WebAssembly, timed against TypeScript" },
+    ],
+  },
+  {
+    label: "Agentic AI",
+    key: "agenticAI",
+    children: [
+      { href: "/agents/", label: "Grid agents", hint: "Ask the data, tasks, rules, WebMCP" },
+      { href: "/ask/", label: "Ask page (RAG)", hint: "Answers from the page, with sources" },
+      { href: "/create/#python-api", label: "Python API", hint: "FastAPI, started by npm run dev" },
+      { href: "/create/#agents", label: "LangGraph agents", hint: "Grid Agent, RAG, Testing Agent, Assistant" },
+    ],
+  },
+  {
+    label: "About",
+    key: "about",
+    children: [
+      { href: "/#packages", label: "Packages", key: "packages", hint: "yuktai CLI, @yuktishaalaa/yuktai, ask-page" },
+      { href: "/#why", label: "Why YuktAI", key: "whyYuktai", hint: "Where it fits, how it compares" },
+      { href: "/about/", label: "How it's built", key: "howBuilt", hint: "The stack behind this site" },
+      { href: LINKS.github, label: "GitHub", key: "github", hint: "Source code, GPL-3.0" },
+    ],
+  },
 ];

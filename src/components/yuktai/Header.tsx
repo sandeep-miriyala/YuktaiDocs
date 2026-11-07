@@ -5,17 +5,21 @@ import { usePathname } from "next/navigation";
 import { ChatIcon, GlobeIcon } from "@yuktishaalaa/yuktai/icons";
 import { YuktaiPreferences, useUiText } from "@yuktishaalaa/yuktai/experience";
 import config from "@config";
-import { NAV } from "@/data/site";
+import { NAV, isGroup } from "@/data/site";
 import { SITE_TEXT } from "@/data/uiText";
 import { ask } from "./ask";
 import InstallButton from "./InstallButton";
 import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
+import NavMenu from "./NavMenu";
 
 export default function Header() {
   const path = usePathname();
   const { t, lang } = useUiText(SITE_TEXT);
-  const here = (href: string) => href.startsWith("/") && !href.includes("#") && href !== "/" && path.startsWith(href);
+  const here = (href: string) => {
+    const page = href.split("#")[0];
+    return href.startsWith("/") && page !== "/" && !href.startsWith("/#") && path.startsWith(page);
+  };
   return (
     <header className="topbar" data-lang={lang}>
       <div className="topbar-in">
@@ -24,9 +28,13 @@ export default function Header() {
           <span>{config.title}</span>
         </Link>
         <nav className="topnav" aria-label="Main" lang={lang}>
-          {NAV.map((n) => (
-            <Link key={n.href} href={n.href} aria-current={here(n.href) ? "page" : undefined}>{t(n.key)}</Link>
-          ))}
+          {NAV.map((n) =>
+            isGroup(n) ? (
+              <NavMenu key={n.key} group={n} t={t} current={here} />
+            ) : (
+              <Link key={n.href} href={n.href} aria-current={here(n.href) ? "page" : undefined}>{n.key ? t(n.key) : n.label}</Link>
+            ),
+          )}
         </nav>
         <div className="tools" lang={lang}>
           {config.features.pwa && <InstallButton />}

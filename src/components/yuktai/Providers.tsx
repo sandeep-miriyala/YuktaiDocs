@@ -36,8 +36,13 @@ export default function Providers({ children }: { children: ReactNode }) {
       const b = (e.target as Element | null)?.closest?.("[data-ask]");
       if (b) ask(b.getAttribute("data-ask") ?? "");
     };
-    if (config.features.pwa && "serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    if ("serviceWorker" in navigator) {
+      if (process.env.NODE_ENV === "production" && config.features.pwa && /^https?:$/.test(location.protocol)) {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      } else {
+        // npm run dev: no offline cache, and remove any old one on this localhost port
+        navigator.serviceWorker.getRegistrations().then((all) => all.forEach((r) => r.unregister())).catch(() => {});
+      }
     }
     document.addEventListener("keydown", onKey);
     document.addEventListener("click", onClick);
