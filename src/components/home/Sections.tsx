@@ -31,7 +31,7 @@ export function Stacks() {
         <p className="lead">The same core runs everywhere. Pick your stack and copy one line.</p>
         <ul className="stack-grid">
           {STACKS.map((s) => (
-            <li key={s.name} className={`stack ${s.tone === "rs" ? "is-rust" : ""}`}>
+            <li key={s.name} className={`stack yk-lift ${s.tone === "rs" ? "is-rust" : ""}`}>
               <Link href={s.href}>
                 <span className={`badge t-${s.tone}`} aria-hidden="true">{s.badge}</span>
                 <strong>{s.name}</strong>
@@ -133,7 +133,7 @@ export function Guides() {
       <ul className="guide-grid">
         {GUIDES.map((g) => (
           <li key={g.href}>
-            <Link className="guide" href={g.href}>
+            <Link className="guide yk-lift" href={g.href}>
               <span className="iconbox"><GuideIcon name={g.icon} /></span>
               <strong>{g.title}</strong>
               <span>{g.text}</span>
@@ -168,7 +168,7 @@ export function Packages() {
       <p className="lead">Start a new app with the <code>yuktai</code> command, or add the two libraries to a site you already have.</p>
       <ul className="pkg-grid">
         {PACKAGES.map((p) => (
-          <li key={p.name} className={p.cli ? "pkg pkg-cli" : "pkg"}>
+          <li key={p.name} className={p.cli ? "pkg pkg-cli yk-lift" : "pkg yk-lift"}>
             <div className="pkg-head">
               <span className="iconbox"><GuideIcon name={p.icon} /></span>
               <div>

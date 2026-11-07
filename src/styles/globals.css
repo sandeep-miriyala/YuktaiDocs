@@ -28,7 +28,7 @@ section.wrap, .band { padding-block: 64px; }
 @media (forced-colors: active) { .grad { color: CanvasText; background: none; } }
 
 /* ── Header ── */
-.topbar { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--line-soft); background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); }
+.topbar { position: sticky; top: 0; z-index: 30; border-bottom: 1px solid var(--line-soft); background: color-mix(in srgb, var(--bg) 96%, transparent); backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px); }
 .topbar-in { max-width: var(--max); margin: 0 auto; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; min-height: 68px; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 1.1rem; letter-spacing: -.02em; }
 .logo { display: block; flex: none; border-radius: 11px; box-shadow: 0 0 0 1px color-mix(in srgb, #0053ED 45%, transparent); }
@@ -37,7 +37,7 @@ section.wrap, .band { padding-block: 64px; }
 .topnav a { white-space: nowrap; padding: 10px 12px; border-radius: 10px; color: var(--muted); font-weight: 600; font-size: .95rem; text-decoration: none; }
 .topnav a:hover { color: var(--text); background: var(--chip); }
 .tools { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-.ask-btn { display: flex; align-items: center; gap: 10px; min-height: 44px; min-width: 240px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--muted); font: 500 .95rem var(--font); cursor: pointer; }
+.ask-btn { display: flex; align-items: center; gap: 10px; min-height: 44px; min-width: 0; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--muted); font: 500 .95rem var(--font); cursor: pointer; }
 .ask-btn svg { color: var(--accent); }
 .ask-btn .ask-text { flex: 1; text-align: left; }
 .ask-btn:hover { border-color: var(--accent); }
@@ -47,7 +47,7 @@ section.wrap, .band { padding-block: 64px; }
 .icon-btn { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); color: var(--text); cursor: pointer; }
 .icon-btn:hover { border-color: var(--accent); }
 @media (max-width: 980px) { .ver-chip { display: none; } }
-@media (max-width: 820px) {
+@media (max-width: 960px) {
   .topnav { order: 3; width: 100%; overflow-x: auto; }
   .ask-btn { min-width: 0; }
   .ask-btn .kbd { display: none; }
@@ -60,8 +60,14 @@ section.wrap, .band { padding-block: 64px; }
 .btn.primary:hover { transform: translateY(-1px); }
 
 /* ── Hero ── */
-.hero { display: flex; flex-wrap: wrap; gap: 48px; align-items: center; padding: 64px 0 24px; }
+.hero { display: flex; flex-wrap: wrap; gap: 48px; align-items: center; padding: 40px 0 24px; }
 .hero-copy { flex: 1 1 540px; min-width: 0; }
+.brand-banner { display: flex; justify-content: center; padding: 40px 0 0; }
+.hero-banner { display: block; width: min(520px, 100%); height: auto; margin: 0 auto; }
+.hero-banner-dark { display: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero-banner-light { display: none; } :root:not([data-theme="light"]) .hero-banner-dark { display: block; } }
+:root[data-theme="dark"] .hero-banner-light { display: none; }
+:root[data-theme="dark"] .hero-banner-dark { display: block; }
 .hero-badge { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; padding: 5px 12px 5px 6px; border-radius: 999px; background: var(--chip); font-size: .88rem; font-weight: 700; }
 .hero-badge b { padding: 2px 8px; border-radius: 999px; background: var(--grad); color: var(--btn-text); font-size: .7rem; letter-spacing: .06em; }
 .hero h1 { font-size: clamp(2.6rem, 6vw, 4.3rem); line-height: 1.02; letter-spacing: -.045em; margin: 0 0 18px; }
@@ -188,7 +194,7 @@ section.wrap, .band { padding-block: 64px; }
 .footer-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 .notfound { min-height: 50vh; }
 
-@media (max-width: 640px) { section.wrap, .band { padding-block: 44px; } .cta, .panel { padding: 22px; } .hero { padding-top: 36px; gap: 32px; } }
+@media (max-width: 640px) { section.wrap, .band { padding-block: 44px; } .cta, .panel { padding: 22px; } .hero { padding-top: 28px; gap: 32px; } .brand-banner { padding-top: 24px; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -227,7 +233,7 @@ section.wrap, .band { padding-block: 64px; }
 /* ── About: how this site is built ── */
 .about-head { padding-bottom: 8px !important; }
 .about-head h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.05; letter-spacing: -.04em; margin: 0 0 14px; }
-.afterhours { display: flex; gap: 16px; align-items: flex-start; max-width: 820px; padding: 22px 24px; border: 2px solid transparent; border-radius: 18px; background: linear-gradient(var(--panel), var(--panel)) padding-box, var(--grad) border-box; }
+.afterhours { display: flex; gap: 16px; align-items: flex-start; max-width: 960px; padding: 22px 24px; border: 2px solid transparent; border-radius: 18px; background: linear-gradient(var(--panel), var(--panel)) padding-box, var(--grad) border-box; }
 .afterhours .iconbox { margin: 0; flex: none; }
 .afterhours h2 { font-size: 1.3rem; margin: 0 0 6px; }
 .afterhours p { margin: 0; color: var(--muted); }
@@ -260,11 +266,45 @@ section.wrap, .band { padding-block: 64px; }
 }
 
 /* install help and back to top (same as apps made with npx yuktai init) */
-.install { position: relative; }
+.install-wrap { position: relative; }
 .install-help { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; display: grid; gap: 10px; width: min(320px, calc(100vw - 32px)); padding: 16px; border: 1px solid var(--line-soft); border-radius: 16px; background: var(--panel); color: var(--text); box-shadow: var(--shadow); }
 .install-help ol { display: grid; gap: 6px; margin: 0; padding-left: 1.3em; }
 .install-help .hint { margin: 0; }
-.to-top { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: grid; place-items: center; width: 52px; height: 52px; border: 0; border-radius: 50%; background: #0038b4; color: #ffffff; box-shadow: var(--shadow); cursor: pointer; }
+.to-top { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: grid; place-items: center; width: 56px; height: 56px; border: 2px solid #ffffff; border-radius: 50%; background: var(--fab-bg); color: #ffffff; box-shadow: var(--fab-shadow); cursor: pointer; transition: transform .15s; }
+/* Floating buttons (♿ 🛠 from the YuktAI widget, ↑ Back to top): one look, brand gradient, white ring */
+:root { --fab-bg: linear-gradient(135deg, #000633, #0053ed); --fab-shadow: 0 8px 24px rgba(0, 20, 90, .35); --yv-primary: #0038b4; }
+body .yv-fab { background: var(--fab-bg); color: #ffffff; border: 2px solid #ffffff; box-shadow: var(--fab-shadow); transition: transform .15s; }
+body .yv-fab.yv-fab-alt { background: #ffffff; color: #0038b4; border-color: #0038b4; }
+body .yv-fab:hover, .to-top:hover { transform: translateY(-2px); filter: none; }
+body .yv-fab:focus-visible, .to-top:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 .to-top:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 @media (max-width: 640px) { .install-help { position: fixed; left: 16px; right: 16px; top: 72px; width: auto; } .to-top { right: 16px; bottom: 16px; } }
 @media print { .to-top { display: none; } }
+
+@media (min-width: 961px) { .topbar-in { flex-wrap: nowrap; } .topnav { min-width: 0; overflow-x: auto; scrollbar-width: none; } .brand, .tools { flex: none; } }
+/* One-row top bar: on narrower desktops the Ask button keeps its icon and shortcut; the label stays for screen readers */
+@media (max-width: 1480px) and (min-width: 961px) { .ask-btn .ask-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } .topnav a { padding: 10px 9px; } }
+@media (max-width: 1100px) and (min-width: 961px) { .install-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .install-btn { padding: 0 12px; } }
+
+/* ── Loading screen, 🌐 language and animations (from @yuktishaalaa/yuktai/experience) ── */
+:root { --yk-splash-bg: var(--bg); --yk-splash-text: var(--text); --yk-splash-accent: #0038b4; --yk-splash-accent-2: #0ea5e9; --yk-lift-shadow: rgba(0, 24, 120, .35); }
+:root[data-theme="dark"] { --yk-splash-accent: #93c5fd; --yk-splash-accent-2: #67e8f9; --yk-lift-shadow: rgba(0, 0, 0, .6); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --yk-splash-accent: #93c5fd; --yk-splash-accent-2: #67e8f9; --yk-lift-shadow: rgba(0, 0, 0, .6); } }
+.yk-splash { --yk-splash-bg: var(--bg); --yk-splash-text: var(--text); }
+.yk-pref { --yk-pref-bg: var(--panel); --yk-pref-panel: var(--panel); --yk-pref-text: var(--text); --yk-pref-border: var(--line); --yk-pref-accent: var(--accent); --yk-pref-focus: var(--focus); }
+.yk-pref__btn { height: 44px; border-radius: 12px; }
+.yk-pref__btn span { font-size: .85rem; }
+:root[data-motion="lively"] .grad.yk-shimmer { background-image: linear-gradient(90deg, #000633, #0038b4, #000633); }
+:root[data-theme="dark"][data-motion="lively"] .grad.yk-shimmer { background-image: linear-gradient(90deg, #93c5fd, #67e8f9, #93c5fd); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"])[data-motion="lively"] .grad.yk-shimmer { background-image: linear-gradient(90deg, #93c5fd, #67e8f9, #93c5fd); } }
+/* Lively: section titles and buttons get a little life too */
+:root[data-motion="lively"] .btn.primary { transition: transform .2s ease, box-shadow .2s ease; }
+:root[data-motion="lively"] .btn.primary:hover { transform: translateY(-2px) scale(1.03); }
+:root[data-motion="lively"] .iconbox { transition: transform .35s cubic-bezier(.2, .9, .3, 1.4); }
+:root[data-motion="lively"] .yk-lift:hover .iconbox { transform: rotate(-8deg) scale(1.12); }
+/* Longer words in Indian languages: keep the header on one row */
+@media (max-width: 1480px) and (min-width: 961px) {
+  .topbar:not([data-lang="en"]) .topnav a { padding: 10px 7px; font-size: .9rem; }
+  .topbar:not([data-lang="en"]) .install-btn span, .topbar:not([data-lang="en"]) .ask-btn .kbd { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .topbar:not([data-lang="en"]) .install-btn { padding-inline: 12px; }
+}

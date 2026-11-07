@@ -2,9 +2,9 @@
 // Change a release here and every page follows.
 
 export const VERSIONS = {
-  yuktai: "5.4.0",
+  yuktai: "5.5.0",
   askPage: "1.0.0",
-  cli: "1.0.1",
+  cli: "1.1.0",
 } as const;
 
 export const LINKS = {
@@ -133,10 +133,10 @@ export const PACKAGES: readonly {
 
 // The header menu (src/components/yuktai/Header.tsx)
 export const NAV = [
-  { href: "/#guides", label: "Docs" },
-  { href: "/create/", label: "Create an app" },
-  { href: "/#packages", label: "Packages" },
-  { href: "/#why", label: "Why YuktAI" },
-  { href: "/about/", label: "How it's built" },
-  { href: LINKS.github, label: "GitHub" },
+  { href: "/#guides", label: "Docs", key: "docs" },
+  { href: "/create/", label: "Create an app", key: "createApp" },
+  { href: "/#packages", label: "Packages", key: "packages" },
+  { href: "/#why", label: "Why YuktAI", key: "whyYuktai" },
+  { href: "/about/", label: "How it's built", key: "howBuilt" },
+  { href: LINKS.github, label: "GitHub", key: "github" },
 ];

@@ -4,12 +4,15 @@ import { useState, type FormEvent } from "react";
 import { ChatIcon, ArrowRightIcon, CopyIcon, CheckIcon } from "@yuktishaalaa/yuktai/icons";
 import { QUESTIONS, VERSIONS } from "@/data/site";
 import { ask } from "@/components/yuktai/ask";
+import { useUiText } from "@yuktishaalaa/yuktai/experience";
+import { SITE_TEXT } from "@/data/uiText";
 
 const INSTALL = `npm i @yuktishaalaa/yuktai@${VERSIONS.yuktai}`;
 
 export default function Hero() {
   const [q, setQ] = useState("");
   const [copied, setCopied] = useState(false);
+  const { t, lang } = useUiText(SITE_TEXT);
 
   function submit(e: FormEvent) {
     e.preventDefault();
@@ -26,21 +29,26 @@ export default function Hero() {
   }
 
   return (
+    <>
+    {/* The YuktAI banner, centred at the top like the README. Light and dark follow the theme button too. */}
+    <div className="brand-banner">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="hero-banner hero-banner-light yk-float" src="/brand/yuktai-logo-light.svg" alt="YuktAI: Open-Source Agentic AI Framework" width={588} height={176} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="hero-banner hero-banner-dark yk-float" src="/brand/yuktai-logo-dark.svg" alt="" width={620} height={208} />
+    </div>
     <section className="hero" aria-labelledby="hero-h">
       <div className="hero-copy">
         <p className="hero-badge"><b>NEW</b> Ask page {VERSIONS.askPage} · WebMCP connects by itself</p>
-        <h1 id="hero-h">Docs that <span className="grad">answer you</span>, right in your browser</h1>
-        <p className="lead">
-          Open-source toolkit for accessible, AI-assisted web apps. Rust search compiled to WebAssembly,
-          one script tag, no server and no API key.
-        </p>
+        <h1 id="hero-h" lang={lang}>{t("h1a")}<span className="grad yk-shimmer">{t("h1b")}</span>{t("h1c")}</h1>
+        <p className="lead" lang={lang}>{t("lead")}</p>
 
         <form className="hero-ask" role="search" onSubmit={submit}>
           <ChatIcon size={22} aria-hidden="true" />
-          <label htmlFor="hero-q" className="sr-only">Ask these docs</label>
-          <input id="hero-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Ask anything about YuktAI…" autoComplete="off" enterKeyHint="send" />
+          <label htmlFor="hero-q" className="sr-only" lang={lang}>{t("placeholder")}</label>
+          <input id="hero-q" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("placeholder")} lang={lang} autoComplete="off" enterKeyHint="send" />
           <kbd className="kbd" aria-hidden="true">Ctrl K</kbd>
-          <button className="btn primary" type="submit"><span>Ask</span><ArrowRightIcon size={18} aria-hidden="true" /></button>
+          <button className="btn primary" type="submit" lang={lang}><span>{t("ask")}</span><ArrowRightIcon size={18} aria-hidden="true" /></button>
         </form>
 
         <ul className="chips" aria-label="Try a question">
@@ -54,7 +62,7 @@ export default function Hero() {
           <code>{INSTALL}</code>
           <button type="button" onClick={copy} aria-live="polite">
             {copied ? <CheckIcon size={16} aria-hidden="true" /> : <CopyIcon size={16} aria-hidden="true" />}
-            {copied ? "Copied" : "Copy"}
+            <span lang={lang}>{copied ? t("copied") : t("copy")}</span>
           </button>
         </div>
       </div>
@@ -76,5 +84,6 @@ export default function Hero() {
         </div>
       </div>
     </section>
+    </>
   );
 }

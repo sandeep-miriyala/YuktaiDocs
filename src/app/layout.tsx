@@ -5,7 +5,9 @@ import Analytics from "@/components/ui/Analytics";
 import Header from "@/components/yuktai/Header";
 import Providers from "@/components/yuktai/Providers";
 import BackToTop from "@/components/yuktai/BackToTop";
-import { THEME_SCRIPT } from "@/components/yuktai/theme";
+import { INSTALL_SCRIPT, THEME_SCRIPT } from "@/components/yuktai/theme";
+import { MOTION_SCRIPT, SPLASH_SCRIPT } from "@yuktishaalaa/yuktai/head";
+import { YuktaiSplash } from "@yuktishaalaa/yuktai/experience";
 import { LINKS, VERSIONS } from "@/data/site";
 import "@/styles/globals.css";
 
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
       { url: "/icons/favicon.svg", type: "image/svg+xml" },
       { url: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
     ],
@@ -33,9 +36,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT + MOTION_SCRIPT + SPLASH_SCRIPT + INSTALL_SCRIPT }} />
       </head>
       <body>
+        {/* Loading screen: the banner and "Welcome" in 7 languages, once per tab */}
+        <YuktaiSplash
+          title={config.title}
+          logo={
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="hero-banner-light" src="/brand/yuktai-logo-light.svg" alt="" width={588} height={176} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="hero-banner-dark" src="/brand/yuktai-logo-dark.svg" alt="" width={620} height={208} />
+            </>
+          }
+        />
         <a className="skip" href="#main">Skip to content</a>
         <Providers>
           <Header />
