@@ -2,9 +2,9 @@
 // Change a release here and every page follows.
 
 export const VERSIONS = {
-  yuktai: "5.3.13",
+  yuktai: "5.4.0",
   askPage: "1.0.0",
-  cli: "0.1.1",
+  cli: "1.0.1",
 } as const;
 
 export const LINKS = {
@@ -101,7 +101,7 @@ export const PACKAGES: readonly {
   {
     name: "yuktai",
     version: VERSIONS.cli,
-    text: "Create a YuktAI app in one command: Next.js + Rust, a 10 lakh row data grid, QA report, icons guide, lifecycle hooks, Ask this page, the ♿ widget and an installable PWA. Hosting is free (Netlify or GitHub Pages).",
+    text: "Create a YuktAI app in one command: Next.js + Rust, a 10 lakh row grid with the Grid AI Assistant (🎤 voice, 24 languages, WebMCP), QA report, icons guide, 🎨 colour and font picker, lifecycle hooks, Ask this page and a complete PWA. Host it anywhere for free.",
     install: "npx yuktai@latest init my-app --yes",
     npm: LINKS.npmCli,
     guide: "/create/",

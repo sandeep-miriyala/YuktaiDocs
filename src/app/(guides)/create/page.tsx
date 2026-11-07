@@ -11,7 +11,7 @@ const OPTIONS: [string, string, string][] = [
   ["--stack", "next-rust, next", "next-rust"],
   ["--template", "docs, starter", "docs"],
   ["--features", "grid, page-tools, icons (comma-separated), or none", "all"],
-  ["--host", "netlify, github-pages, none", "netlify"],
+  ["--host", "none, netlify, github-pages", "none (no hosting files)"],
   ["--accent", "blue, violet, teal, orange", "blue"],
   ["--title", "any text", "from the folder name"],
   ["--yes", "everything on, no questions", ""],
@@ -28,15 +28,15 @@ const TREE = `my-app/
 │   │   ├── qa/             QA report
 │   │   ├── icons/          icons guide
 │   │   └── about/
-│   ├── components/yuktai/  header, logo, widget, Ask, install, theme, lifecycle
+│   ├── components/yuktai/  header, logo, widget, Ask, install, theme, colour and font picker, lifecycle
 │   ├── components/ui/      your components
 │   ├── lib/core.ts         calls the Rust core, TypeScript fallback
 │   ├── data/               menu and links, orders.ts (sample rows)
-│   └── styles/             tokens.css (colours), globals.css
-├── public/                 service worker, app icons
+│   └── styles/             tokens.css, globals.css, look.css, grid.css, qa.css, icons.css
+├── public/                 manifest, service worker, icons, screenshots, favicon.ico
 ├── tests/                  checks for the built site
-├── README.md               written for the choices you made
-└── netlify.toml  or  .github/workflows/deploy.yml`;
+└── README.md               written for the choices you made
+    (+ netlify.toml or .github/workflows/deploy.yml only with --host)`;
 
 export default function CreatePage() {
   return (
@@ -63,10 +63,12 @@ npm run dev        # http://localhost:3000`}</code></pre>
         <thead><tr><th scope="col">Page</th><th scope="col">What it does</th></tr></thead>
         <tbody>
           <tr><td>/grid/</td><td>10 lakh (1,000,000) sample orders made in the browser. Six columns, five data types: text, badge, number, date, yes/no. Search and sort every column in Rust, well under a second.</td></tr>
+          <tr><td>Grid AI Assistant</td><td>Type or say <code>unpaid</code>, <code>search Pune</code>, <code>sort by date</code>. 🎤 voice and 24 input languages (English and the 22 Indian languages), your own phrases as rules, 11 WebMCP tools for browser agents.</td></tr>
           <tr><td>/qa/</td><td>15 WCAG 2.2 checks, a score, what to fix and a Markdown report. A practice area with mistakes to try it on.</td></tr>
           <tr><td>/icons/</td><td>Every YuktAI icon: search, size, outline or filled, colour with a contrast check, copy the code.</td></tr>
           <tr><td>/lifecycle/</td><td>The three moments of every part: <code>onStart</code>, <code>onChange</code>, <code>onEnd</code>.</td></tr>
-          <tr><td>Every page</td><td>Ask this page (Ctrl + K), the ♿ widget, the 🛠 page tools, Install, light and dark.</td></tr>
+          <tr><td>Every page</td><td>Ask this page (Ctrl + K), the ♿ widget, the 🛠 page tools, Install, light and dark, and the 🎨 colour and font picker (any colour kept at 7:1; fonts on the visitor&apos;s computer on desktop Chrome and Edge).</td></tr>
+          <tr><td>PWA</td><td>Maskable and monochrome icons, favicon.ico, screenshots for Chrome&apos;s install window, shortcuts to the grid, QA report and icons.</td></tr>
         </tbody>
       </table>
 
@@ -115,10 +117,11 @@ npm run dev        # http://localhost:3000`}</code></pre>
       </p>
       <pre><code>{`rustup target add wasm32-unknown-unknown`}</code></pre>
 
-      <h2 id="deploy">6. Deploy for free</h2>
+      <h2 id="deploy">6. Put it online</h2>
       <p>
-        <strong>Netlify:</strong> push to GitHub and add the repository in Netlify; <code>netlify.toml</code> is already there.{" "}
-        <strong>GitHub Pages:</strong> push, then Settings → Pages → Source: GitHub Actions. See also <Link href="/nextjs/">Next.js setup</Link>.
+        <code>npm run build</code> makes a static site in <code>out/</code>; any static host can serve it. Hosting files are added only when
+        you ask: <code>--host netlify</code> writes <code>netlify.toml</code>, <code>--host github-pages</code> writes a GitHub Action
+        (then Settings → Pages → Source: GitHub Actions). See also <Link href="/nextjs/">Next.js setup</Link>.
       </p>
       <GuideDemo page="create" />
     </>

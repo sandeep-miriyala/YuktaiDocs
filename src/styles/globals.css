@@ -247,3 +247,14 @@ section.wrap, .band { padding-block: 64px; }
 .guide-body > pre { max-width: 100%; overflow-x: auto; margin: 0 0 18px; padding: 16px 18px; border-radius: 14px; background: var(--code-bg); color: var(--code-text); font-size: .88rem; line-height: 1.6; }
 .guide-body > pre code { background: none; padding: 0; color: inherit; white-space: pre; }
 .guide-body code { overflow-wrap: anywhere; }
+
+/* YuktAI 5.3.14: the data grid and its AI Assistant follow the site colours */
+.yk-grid {
+  --yk-grid-bg: var(--panel); --yk-grid-text: var(--text); --yk-grid-border: var(--line-soft);
+  --yk-grid-control-bg: var(--panel); --yk-grid-control-bg-muted: var(--panel2); --yk-grid-control-border: var(--line); --yk-grid-control-text: var(--text);
+  --yk-grid-muted: var(--muted); --yk-grid-chip-bg: var(--chip); --yk-grid-selected-bg: var(--chip);
+  --yk-grid-accent: #0038b4; --yk-grid-accent-text: #ffffff;
+  --yk-grid-assistant-bg: var(--panel); --yk-grid-assistant-surface: var(--panel2); --yk-grid-assistant-border: var(--line-soft);
+  --yk-grid-assistant-text: var(--text); --yk-grid-assistant-muted: var(--muted); --yk-grid-assistant-accent: #0038b4;
+  --yk-grid-assistant-user-bg: var(--chip); --yk-grid-assistant-ai-bg: var(--panel2);
+}
