@@ -308,3 +308,9 @@ body .yv-fab:focus-visible, .to-top:focus-visible { outline: 3px solid var(--foc
   .topbar:not([data-lang="en"]) .install-btn span, .topbar:not([data-lang="en"]) .ask-btn .kbd { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .topbar:not([data-lang="en"]) .install-btn { padding-inline: 12px; }
 }
+
+/* Selected text stays readable everywhere, also inside the dark code boxes
+   (Windows can draw a light selection colour over light code text) */
+::selection { background: #b9d2ff; color: #0d0b1f; }
+:is(pre, .pkg-install, .stack code, .install, .cta pre) ::selection,
+:is(pre, .pkg-install, .stack code, .install, .cta pre)::selection { background: #2563eb; color: #ffffff; }
