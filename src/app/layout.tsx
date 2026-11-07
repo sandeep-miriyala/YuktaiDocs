@@ -9,6 +9,16 @@ import { INSTALL_SCRIPT, THEME_SCRIPT } from "@/components/yuktai/theme";
 import { MOTION_SCRIPT, SPLASH_SCRIPT } from "@yuktishaalaa/yuktai/head";
 import { YuktaiSplash } from "@yuktishaalaa/yuktai/experience";
 import { LINKS, VERSIONS } from "@/data/site";
+
+// How long the loading screen stays on the first visit in a tab (Skip, Esc or a click end it sooner)
+const SPLASH_SECONDS = 15;
+const SPLASH_TIPS = [
+  "10 lakh rows, searched and sorted in Rust, right in your browser.",
+  "Ask this page: answers come with their source, and nothing is sent anywhere.",
+  "WCAG 2.2 accessibility fixes on every page, with one script tag.",
+  "Menus in English, తెలుగు, हिन्दी, தமிழ், ಕನ್ನಡ, മലയാളം and বাংলা.",
+  "Free and open source. No server, no API key.",
+];
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -39,9 +49,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT + MOTION_SCRIPT + SPLASH_SCRIPT + INSTALL_SCRIPT }} />
       </head>
       <body>
-        {/* Loading screen: the banner and "Welcome" in 7 languages, once per tab */}
+        {/* Loading screen: the banner, "Welcome" in 7 languages and short tips, once per tab. Skip any time. */}
         <YuktaiSplash
           title={config.title}
+          minMs={SPLASH_SECONDS * 1000}
+          tips={SPLASH_TIPS}
           logo={
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
