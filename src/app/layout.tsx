@@ -4,6 +4,7 @@ import config from "@config";
 import Analytics from "@/components/ui/Analytics";
 import Header from "@/components/yuktai/Header";
 import Providers from "@/components/yuktai/Providers";
+import BackToTop from "@/components/yuktai/BackToTop";
 import { THEME_SCRIPT } from "@/components/yuktai/theme";
 import { LINKS, VERSIONS } from "@/data/site";
 import "@/styles/globals.css";
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </span>
             </div>
           </footer>
+          <BackToTop />
         </Providers>
         <Analytics />
       </body>

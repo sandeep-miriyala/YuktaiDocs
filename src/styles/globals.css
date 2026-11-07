@@ -258,3 +258,13 @@ section.wrap, .band { padding-block: 64px; }
   --yk-grid-assistant-text: var(--text); --yk-grid-assistant-muted: var(--muted); --yk-grid-assistant-accent: #0038b4;
   --yk-grid-assistant-user-bg: var(--chip); --yk-grid-assistant-ai-bg: var(--panel2);
 }
+
+/* install help and back to top (same as apps made with npx yuktai init) */
+.install { position: relative; }
+.install-help { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; display: grid; gap: 10px; width: min(320px, calc(100vw - 32px)); padding: 16px; border: 1px solid var(--line-soft); border-radius: 16px; background: var(--panel); color: var(--text); box-shadow: var(--shadow); }
+.install-help ol { display: grid; gap: 6px; margin: 0; padding-left: 1.3em; }
+.install-help .hint { margin: 0; }
+.to-top { position: fixed; right: 24px; bottom: 24px; z-index: 50; display: grid; place-items: center; width: 52px; height: 52px; border: 0; border-radius: 50%; background: #0038b4; color: #ffffff; box-shadow: var(--shadow); cursor: pointer; }
+.to-top:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+@media (max-width: 640px) { .install-help { position: fixed; left: 16px; right: 16px; top: 72px; width: auto; } .to-top { right: 16px; bottom: 16px; } }
+@media print { .to-top { display: none; } }
