@@ -6,7 +6,7 @@
 //     release once and needed a refresh.)
 //   • the YuktAI script (jsDelivr or unpkg, a fixed version): cache first
 // Bump CACHE whenever you publish a change, so visitors get the new files.
-const CACHE = "yuktaidocs-v33"
+const CACHE = "yuktaidocs-v34"
 const CORE = [
   "/",
   "/accessibility/",

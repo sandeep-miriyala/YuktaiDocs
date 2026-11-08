@@ -11,7 +11,7 @@ const OPTIONS: [string, string, string][] = [
   ["--stack", "next-rust, next", "next-rust"],
   ["--template", "docs, starter", "docs"],
   ["--features", "grid, page-tools, icons, backend (comma-separated), or none", "all"],
-  ["--host", "none, netlify, github-pages", "none (no hosting files)"],
+  ["--host", "github-pages, netlify, none", "github-pages (a GitHub Action that publishes on every push)"],
   ["--accent", "blue, violet, teal, orange", "blue"],
   ["--title", "any text", "from the folder name"],
   ["--yes", "everything on, no questions", ""],
@@ -19,7 +19,7 @@ const OPTIONS: [string, string, string][] = [
 ];
 
 const TREE = `my-app/
-├── yuktai.config.ts        settings: name, colours, features
+├── yuktai.config.ts        the one settings file: name, colours, features (no next.config to look after)
 ├── rust/                   Rust core → WebAssembly
 ├── backend/                Python API (FastAPI): app/main.py, app/agents/, app/routes/,
 │                           knowledge/ (RAG documents), db/ (PostgreSQL), tests/ (pytest)
@@ -41,7 +41,7 @@ const TREE = `my-app/
 ├── tests/                  checks for the built site, e2e/ (Playwright)
 ├── playwright.config.ts
 └── README.md               written for the choices you made
-    (+ netlify.toml or .github/workflows/deploy.yml only with --host)`;
+    (+ .github/workflows/deploy.yml, or netlify.toml with --host netlify)`;
 
 export default function CreatePage() {
   return (
@@ -50,14 +50,14 @@ export default function CreatePage() {
         <p className="kicker">Create an app</p>
         <h1>One command, a ready app</h1>
         <p className="lead">
-          <code>npx yuktai init</code> makes a Next.js + Rust app with a Python API, LangGraph agents, the YuktAI accessibility
+          <code>npm create yuktai@latest</code> makes a Next.js + Rust app with a Python API, LangGraph agents, the YuktAI accessibility
           widget, Ask this page (Ctrl + K), 163 icons and an installable PWA. One <code>npm run dev</code> starts all of it. This
           site was made with it.
         </p>
       </div>
 
       <h2 id="start">1. Create</h2>
-      <pre><code>{`npx yuktai@latest init my-app --yes
+      <pre><code>{`npm create yuktai@latest my-app -- --yes     # or: npx yuktai@latest init my-app --yes
 cd my-app
 npm run dev        # site http://localhost:3000 · Python API http://localhost:8000/docs`}</code></pre>
       <p>
@@ -76,6 +76,34 @@ npm run dev        # site http://localhost:3000 · Python API http://localhost:8
           <tr><td>/lifecycle/</td><td>The three moments of every part: <code>onStart</code>, <code>onChange</code>, <code>onEnd</code>.</td></tr>
           <tr><td>Every page</td><td>Ask this page (Ctrl + K), the ♿ widget, the 🛠 page tools, Install, light and dark, and the 🎨 colour and font picker (any colour kept at 7:1; fonts on the visitor&apos;s computer on desktop Chrome and Edge).</td></tr>
           <tr><td>PWA</td><td>Maskable and monochrome icons, favicon.ico, screenshots for Chrome&apos;s install window, shortcuts to the grid, QA report and icons.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="codespaces">No laptop? Use GitHub Codespaces</h2>
+      <p>
+        Everything above works in a browser. GitHub Codespaces gives you a cloud computer with Node.js and Python (free for 60 hours a
+        month on 2 cores). <a href="https://miriyalas.github.io/yuktai/">This live site</a> was created, built and published that way,
+        without a laptop.
+      </p>
+      <ol>
+        <li>Open <a href="https://github.com/codespaces">github.com/codespaces</a> → <strong>Blank</strong> → <strong>Use this template</strong>.</li>
+        <li>In the terminal: <code>npm create yuktai@latest my-app -- --yes</code>, then <code>cd my-app</code> and <code>npm run dev</code>. Open port 3000 from the <strong>Ports</strong> tab.</li>
+        <li>To publish: push <code>my-app</code> to a new GitHub repository, then <strong>Settings → Pages → Source: GitHub Actions</strong>. The site is live at <code>https://&lt;you&gt;.github.io/&lt;repo&gt;/</code> in 2 to 4 minutes, Rust included.</li>
+      </ol>
+      <p className="note">
+        To use the Python API from the page inside Codespaces, make port 8000 <strong>Public</strong> in the Ports tab and start with
+        {" "}<code>NEXT_PUBLIC_API_URL=https://$CODESPACE_NAME-8000.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN npm run dev</code>.
+        Stop the codespace when you finish so the free hours last.
+      </p>
+
+      <h2 id="demos">Live demos made with it</h2>
+      <table className="ref">
+        <caption className="sr-only">Sites made with yuktai init</caption>
+        <thead><tr><th scope="col">Site</th><th scope="col">What it shows</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://miriyalas.github.io/yuktai/">miriyalas.github.io/yuktai</a></td><td>The app <code>--yes</code> makes, created and published from a browser with Codespaces: 25 lakh row grid, Agentic AI menu, QA report, icons.</td></tr>
+          <tr><td><a href="https://sandeep-miriyala.github.io/padyalavala/">పద్యాలవాల</a></td><td>A Telugu poetry site: 65 poems, the Grid AI Assistant in Telugu, Rust search, listen, share, Telugu-first menus.</td></tr>
+          <tr><td><a href="/">YuktaiDocs</a></td><td>This site.</td></tr>
         </tbody>
       </table>
 
@@ -161,9 +189,10 @@ YUKTAI_ENV=development   # production turns off the developer agents`}</code></p
 
       <h2 id="deploy">8. Put it online</h2>
       <p>
-        <code>npm run build</code> makes a static site in <code>out/</code>; any static host can serve it. Hosting files are added only when
-        you ask: <code>--host netlify</code> writes <code>netlify.toml</code>, <code>--host github-pages</code> writes a GitHub Action
-        (then Settings → Pages → Source: GitHub Actions). The Python API needs a host that runs Python (Render, Railway, Fly.io or
+        <code>npm run build</code> makes a static site in <code>out/</code>; any static host can serve it. New apps come with a GitHub
+        Action: push to GitHub, then <strong>Settings → Pages → Source: GitHub Actions</strong>. Don&apos;t click <em>Configure</em> on
+        GitHub&apos;s suggested Next.js workflow; the app has its own. Renamed the repository? Run the workflow again. For Netlify, create the
+        app with <code>--host netlify</code>. The Python API needs a host that runs Python (Render, Railway, Fly.io or
         your own server); set <code>NEXT_PUBLIC_API_URL</code> to its address when you build the site. See also
         {" "}<Link href="/nextjs/">Next.js setup</Link>.
       </p>

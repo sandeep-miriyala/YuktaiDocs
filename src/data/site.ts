@@ -4,7 +4,7 @@
 export const VERSIONS = {
   yuktai: "5.5.3",
   askPage: "1.0.0",
-  cli: "1.3.0",
+  cli: "1.3.1",
 } as const;
 
 export const LINKS = {
@@ -21,7 +21,7 @@ export type IconKey =
 
 // The guides (src/app/(guides)/<name>/page.tsx)
 export const GUIDES: { href: string; title: string; text: string; icon: IconKey }[] = [
-  { href: "/create/", title: "Create an app", text: "npx yuktai@latest init my-app --yes: Next.js + Rust + Python, a 25 lakh row grid, LangGraph agents, RAG, QA report, icons and a PWA in one command.", icon: "install" },
+  { href: "/create/", title: "Create an app", text: "npm create yuktai@latest my-app: Next.js + Rust + Python, a 25 lakh row grid, LangGraph agents, RAG, QA report, icons and a PWA in one command.", icon: "install" },
   { href: "/accessibility/", title: "Accessibility", text: "Floating ♿ button: contrast, text size, dyslexia font, colour-blind filters, reduced motion, speak on focus.", icon: "accessibility" },
   { href: "/grid/", title: "Data grid", text: "Search, sort, pages, selection, CSV, five themes and keyboard navigation, with the engine and time shown.", icon: "grid" },
   { href: "/agents/", title: "Grid agents", text: "Ask the data in plain words, multi-step tasks, custom rules, WebMCP tools for browser agents.", icon: "robot" },
@@ -102,7 +102,7 @@ export const PACKAGES: readonly {
     name: "yuktai",
     version: VERSIONS.cli,
     text: "Create a YuktAI app in one command: Next.js + Rust + a Python API, a 25 lakh row grid with the Grid AI Assistant (🎤 voice, 24 languages, WebMCP), LangGraph agents (Grid Agent, RAG, Testing Agent, YuktAI Assistant), PostgreSQL basics, Playwright tests, QA report, icons guide and a complete PWA.",
-    install: "npx yuktai@latest init my-app --yes",
+    install: "npm create yuktai@latest my-app",
     npm: LINKS.npmCli,
     guide: "/create/",
     onThisSite: "this site was created with it",
@@ -142,7 +142,7 @@ export const NAV: NavItem[] = [
     label: "Get started",
     key: "getStarted",
     children: [
-      { href: "/create/", label: "Create an app", key: "createApp", hint: "npx yuktai@latest init my-app --yes" },
+      { href: "/create/", label: "Create an app", key: "createApp", hint: "npm create yuktai@latest my-app" },
       { href: "/nextjs/", label: "Next.js setup", hint: "YuktAIWrapper for the App Router" },
       { href: "/#start", label: "JavaScript / HTML", hint: "Two script tags on any site" },
       { href: "/jquery/", label: "jQuery", hint: "jQuery 1.12 to 4.0" },
